@@ -3,106 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하늘교 하멘 성전</title>
-    <!-- Pretendard 웹폰트 -->
+    <title>하늘교 '하멘' 성전</title>
+    <!-- Pretendard 및 명조 폰트 로드 -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
-            --primary-hover-gradient: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
-            --bg-color: #0b0f19;
-            --card-bg: rgba(20, 15, 38, 0.75);
+            --bg-color: #0d0614;
+            --card-bg: rgba(23, 14, 38, 0.85);
+            --border-color: rgba(251, 191, 36, 0.25);
             --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --text-sub: #a1a1aa;
             --accent-gold: #fbbf24;
-            --purple-glow: rgba(168, 85, 247, 0.4);
-            --border-color: rgba(168, 85, 247, 0.25);
+            --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            --gold-glow: rgba(245, 158, 11, 0.5);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(168, 85, 247, 0.28) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.15) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(124, 58, 237, 0.1) 0px, transparent 70%);
+                radial-gradient(at 50% 0%, rgba(112, 26, 117, 0.35) 0px, transparent 60%),
+                radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.12) 0px, transparent 60%);
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 15px 60px 15px;
+            padding: 40px 15px 60px 15px;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 620px;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 20px;
         }
 
+        /* 헤더 디자인 */
         header {
             text-align: center;
-            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(88, 28, 135, 0.5);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #d8b4fe;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .church-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #ffffff;
+            font-family: 'Gowun Batang', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fef08a;
             letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            text-shadow: 0 0 25px rgba(168, 85, 247, 0.8), 0 0 10px rgba(168, 85, 247, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            text-shadow: 0 0 20px rgba(250, 204, 21, 0.4), 0 0 10px rgba(245, 158, 11, 0.3);
+            margin: 4px 0;
         }
 
         .sub-title {
             color: var(--text-sub);
             font-size: 0.95rem;
-            line-height: 1.4;
+            line-height: 1.5;
+            max-width: 480px;
+        }
+
+        .sub-title highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
         }
 
         .day-counter-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-top: 14px;
-            background: rgba(251, 191, 36, 0.12);
-            border: 1px solid rgba(251, 191, 36, 0.35);
-            color: var(--accent-gold);
-            padding: 6px 16px;
+            margin-top: 6px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fef08a;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 0.88rem;
-            font-weight: 600;
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
         }
 
+        /* 카드 공통 */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 상단 입력 & 카운터 레이아웃 */
+        .top-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 16px;
+        }
+
+        @media (max-width: 580px) {
+            .top-card-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .profile-section {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .input-group {
@@ -112,9 +146,12 @@
         }
 
         .input-label {
-            font-size: 0.85rem;
-            color: var(--text-sub);
+            font-size: 0.8rem;
+            color: #d4d4d8;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .input-row {
@@ -124,112 +161,150 @@
 
         input[type="text"] {
             width: 100%;
-            background: rgba(11, 15, 25, 0.7);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 16px;
+            background: rgba(10, 6, 18, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: all 0.2s;
         }
 
         input[type="text"]:focus {
-            border-color: #c084fc;
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
         }
 
         .save-btn {
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid var(--border-color);
-            color: #e9d5ff;
-            padding: 0 18px;
-            border-radius: 12px;
-            font-weight: 600;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fef08a;
+            padding: 0 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.2s;
         }
 
         .save-btn:hover {
-            background: rgba(168, 85, 247, 0.4);
+            background: rgba(245, 158, 11, 0.4);
             color: #fff;
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
         }
 
-        .counter-section {
-            text-align: center;
-            padding: 12px 0;
-        }
-
-        .counter-title {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .counter-value {
-            font-size: 3.6rem;
-            font-weight: 900;
-            color: var(--accent-gold);
-            text-shadow: 0 0 25px rgba(251, 191, 36, 0.5);
-            line-height: 1.1;
-        }
-
-        .hamen-btn-container {
+        /* 누적 카운터 박스 */
+        .counter-box {
+            background: rgba(10, 6, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            padding: 16px;
         }
 
-        .hamen-btn {
-            width: 100%;
-            height: 64px;
-            border: none;
-            border-radius: 16px;
-            background: var(--primary-gradient);
-            color: white;
-            font-size: 1.35rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 8px 25px var(--purple-glow), 0 0 15px rgba(168, 85, 247, 0.3);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        .counter-title {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .counter-value {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            line-height: 1;
+        }
+
+        /* 하멘 원형 버튼 영역 */
+        .hamen-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: #fef08a;
+            font-weight: 700;
+        }
+
+        .circle-btn-wrapper {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
         }
 
-        .hamen-btn:hover:not(:disabled) {
-            background: var(--primary-hover-gradient);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6), 0 0 20px rgba(192, 132, 252, 0.4);
+        .circle-hamen-btn {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            border: 3px solid #fef08a;
+            background: radial-gradient(circle, #f59e0b 0%, #d97706 60%, #78350f 100%);
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            box-shadow: 0 0 40px var(--gold-glow), inset 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .hamen-btn:active:not(:disabled) {
-            transform: translateY(1px);
+        .circle-hamen-btn:hover:not(:disabled) {
+            transform: scale(1.04);
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5);
         }
 
-        .hamen-btn:disabled {
-            background: #1e293b;
-            color: #64748b;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: not-allowed;
+        .circle-hamen-btn:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .circle-hamen-btn:disabled {
+            background: radial-gradient(circle, #3f3f46 0%, #18181b 100%);
+            border-color: #52525b;
+            color: #71717a;
             box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .hands-icon {
+            font-size: 2.2rem;
+            margin-bottom: -2px;
+        }
+
+        .btn-main-text {
+            font-family: 'Gowun Batang', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .btn-sub-text {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            font-weight: 500;
         }
 
         .cooldown-text {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: #f43f5e;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-weight: 700;
         }
 
+        /* 실시간 기록실 */
         .history-header {
             display: flex;
             justify-content: space-between;
@@ -238,7 +313,7 @@
         }
 
         .history-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -246,10 +321,10 @@
         }
 
         .view-toggle-btn {
-            background: rgba(168, 85, 247, 0.12);
-            border: 1px solid var(--border-color);
-            color: #d8b4fe;
-            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-sub);
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 600;
@@ -258,7 +333,7 @@
         }
 
         .view-toggle-btn:hover {
-            background: rgba(168, 85, 247, 0.25);
+            background: rgba(245, 158, 11, 0.2);
             color: #fff;
         }
 
@@ -267,9 +342,8 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-height: 450px;
+            max-height: 400px;
             overflow-y: auto;
-            padding-right: 4px;
         }
 
         .history-list::-webkit-scrollbar {
@@ -277,24 +351,18 @@
         }
 
         .history-list::-webkit-scrollbar-thumb {
-            background: rgba(168, 85, 247, 0.4);
+            background: rgba(245, 158, 11, 0.4);
             border-radius: 4px;
         }
 
         .history-item {
-            background: rgba(11, 15, 25, 0.6);
-            border: 1px solid rgba(168, 85, 247, 0.15);
+            background: rgba(10, 6, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 12px 14px;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
+            gap: 4px;
         }
 
         .item-top {
@@ -305,8 +373,8 @@
 
         .user-nickname {
             font-weight: 700;
-            font-size: 0.9rem;
-            color: #e2e8f0;
+            font-size: 0.88rem;
+            color: #e4e4e7;
         }
 
         .timestamp {
@@ -315,17 +383,16 @@
         }
 
         .prayer-text {
-            font-size: 0.88rem;
-            color: var(--accent-gold);
-            line-height: 1.35;
+            font-size: 0.85rem;
+            color: #fef08a;
             word-break: break-all;
         }
 
         .empty-history {
             text-align: center;
-            padding: 30px 0;
+            padding: 24px 0;
             color: var(--text-sub);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.5;
         }
 
@@ -334,7 +401,7 @@
             text-align: center;
             font-size: 0.8rem;
             color: var(--text-sub);
-            padding-top: 20px;
+            padding-top: 10px;
         }
 
         .toast {
@@ -342,13 +409,13 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #2e1065;
+            background: #27272a;
             color: #fff;
             padding: 12px 24px;
             border-radius: 30px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(168, 85, 247, 0.4);
-            font-size: 0.9rem;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            font-size: 0.88rem;
             font-weight: 600;
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -365,47 +432,64 @@
 <body>
 
     <div class="container">
+        <!-- 상단 헤더 -->
         <header>
-            <h1 class="church-title">✨ 하늘교 성전 ✨</h1>
-            <p class="sub-title">DJ 하늘을 향한 마음을 모아 기도합시다</p>
+            <div class="top-badge">📻 SPOON RADIO DJ 하늘 공식 하늘교</div>
+            <h1 class="church-title">하늘교 '하멘' 성전</h1>
+            <p class="sub-title">
+                매일 매시간 DJ 하늘님을 향해 올리는 거룩한 한마디,<br>
+                <span style="color: var(--accent-gold); font-weight: 700;">"하멘"</span> 버튼을 눌러 당신의 마음을 남겨주세요.
+            </p>
             <div class="day-counter-badge">
-                <span>🙏</span> <span id="daysCount">0</span>일째 되는 하늘교
+                <span>✨</span> <span id="daysCount">0</span>일째 되는 하늘교
             </div>
         </header>
 
-        <!-- 프로필 & 기도문 설정 -->
-        <div class="card profile-section">
-            <div class="input-group">
-                <label class="input-label" for="nicknameInput">신도 닉네임</label>
-                <div class="input-row">
-                    <input type="text" id="nicknameInput" placeholder="닉네임을 입력하세요" maxlength="12">
-                    <button class="save-btn" id="saveNicknameBtn">저장</button>
+        <!-- 상단 카드 영역 (2열 레이아웃) -->
+        <div class="card top-card-grid">
+            <div class="profile-section">
+                <div class="input-group">
+                    <label class="input-label" for="nicknameInput">
+                        <span>👤</span> 성도 닉네임 설정
+                    </label>
+                    <div class="input-row">
+                        <input type="text" id="nicknameInput" placeholder="닉네임을 입력하세요" maxlength="12">
+                        <button class="save-btn" id="saveNicknameBtn">저장</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" for="prayerInput">
+                        <span>💬</span> 기도 한마디
+                    </label>
+                    <input type="text" id="prayerInput" placeholder="하늘님께 남길 기도/메시지를 적어주세요" maxlength="50">
                 </div>
             </div>
 
-            <div class="input-group">
-                <label class="input-label" for="prayerInput">기도 한마디</label>
-                <input type="text" id="prayerInput" placeholder="하늘님께 전할 기도를 입력하세요 (기본: 하멘!)" maxlength="50">
+            <div class="counter-box">
+                <div class="counter-title">전체 누적 하멘</div>
+                <div class="counter-value" id="totalCount">0</div>
             </div>
         </div>
 
-        <!-- 누적 카운터 -->
-        <div class="card counter-section">
-            <div class="counter-title">전체 누적 하멘</div>
-            <div class="counter-value" id="totalCount">0</div>
-        </div>
+        <!-- 중앙 동그라미 하멘 버튼 카드 -->
+        <div class="card hamen-section">
+            <div class="status-text" id="statusText">지금 하멘을 누를 수 있습니다!</div>
+            
+            <div class="circle-btn-wrapper">
+                <button class="circle-hamen-btn" id="hamenBtn">
+                    <span class="hands-icon">🙏</span>
+                    <span class="btn-main-text">하멘</span>
+                    <span class="btn-sub-text">클릭하여 기도 바치기</span>
+                </button>
+            </div>
 
-        <!-- 하멘 클릭 버튼 -->
-        <div class="hamen-btn-container">
-            <button class="hamen-btn" id="hamenBtn">
-                <span>🙏</span> 하멘! 누르기
-            </button>
             <div class="cooldown-text" id="cooldownNotice" style="display: none;">
                 ⏳ 다음 기도까지 남은 시간: <span id="timerText">60:00</span>
             </div>
         </div>
 
-        <!-- 실시간 기록실 -->
+        <!-- 실시간 하멘 모음 -->
         <div class="card">
             <div class="history-header">
                 <div class="history-title">
@@ -419,7 +503,7 @@
         </div>
 
         <footer>
-            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길! 2026.09.20
+            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길!
         </footer>
     </div>
 
@@ -431,6 +515,7 @@
         const saveNicknameBtn = document.getElementById('saveNicknameBtn');
         const totalCountEl = document.getElementById('totalCount');
         const hamenBtn = document.getElementById('hamenBtn');
+        const statusText = document.getElementById('statusText');
         const cooldownNotice = document.getElementById('cooldownNotice');
         const timerText = document.getElementById('timerText');
         const historyList = document.getElementById('historyList');
@@ -450,7 +535,10 @@
             if (currentNickname) {
                 nicknameInput.value = currentNickname;
             } else {
-                currentNickname = '무명 신도';
+                // 무작위 기본 닉네임 생성 (예: 하늘신도_5863)
+                const randNum = Math.floor(1000 + Math.random() * 9000);
+                currentNickname = `하늘신도_${randNum}`;
+                nicknameInput.value = currentNickname;
             }
 
             calculateDays();
@@ -529,7 +617,7 @@
             localStorage.setItem('sky_last_click_time', lastClickTime);
 
             const newRecord = {
-                nickname: currentNickname || '무명 신도',
+                nickname: currentNickname || '하늘신도',
                 prayer: prayerMsg,
                 timestamp: formatDate(new Date(now))
             };
@@ -539,7 +627,7 @@
 
             updateHistoryUI();
             checkCooldown();
-            showToast('기도가 성공적으로 등록되었습니다. 하멘!');
+            showToast('기도가 성공적으로 바쳐졌습니다. 하멘!');
             
             prayerInput.value = '';
         });
@@ -572,7 +660,9 @@
 
             if (elapsed < COOLDOWN_TIME) {
                 hamenBtn.disabled = true;
-                cooldownNotice.style.display = 'flex';
+                statusText.textContent = '1시간 쿨타임이 진행 중입니다.';
+                statusText.style.color = '#f43f5e';
+                cooldownNotice.style.display = 'block';
                 
                 const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
                 const minutes = Math.floor(remaining / 60);
@@ -581,6 +671,8 @@
                 timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             } else {
                 hamenBtn.disabled = false;
+                statusText.textContent = '지금 하멘을 누를 수 있습니다!';
+                statusText.style.color = '#fef08a';
                 cooldownNotice.style.display = 'none';
             }
         }
