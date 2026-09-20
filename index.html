@@ -3,498 +3,597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하늘교 '하멘' 성전 - DJ 하늘 팬페이지</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+    <title>하늘교 하멘 성전</title>
+    <!-- Pretendard 웹폰트 로드 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
+        :root {
+            --primary-color: #a855f7;
+            --primary-hover: #9333ea;
+            --bg-color: #0b0f19;
+            --card-bg: rgba(23, 15, 38, 0.75);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-gold: #fbbf24;
+            --border-color: rgba(168, 85, 247, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: #0d0814;
-            color: #f3f4f6;
+            background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(217, 119, 6, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 10% 40%, rgba(88, 28, 135, 0.2) 0%, transparent 50%);
-            background-attachment: fixed;
+                radial-gradient(at 10% 10%, rgba(168, 85, 247, 0.25) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(251, 191, 36, 0.12) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px 60px 15px;
         }
 
-        .font-serif-kr {
-            font-family: 'Gowun Batang', serif;
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        /* Glassmorphism Effect */
-        .glass-card {
-            background: rgba(22, 15, 38, 0.75);
+        header {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+
+        .church-title {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .sub-title {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .day-counter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: var(--accent-gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
         }
 
-        /* Glow Animations */
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.4), inset 0 0 10px rgba(234, 179, 8, 0.2); }
-            50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.8), inset 0 0 20px rgba(234, 179, 8, 0.5); }
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
-        .hamen-btn-active {
-            animation: pulseGlow 3s infinite ease-in-out;
-            background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #78350f 100%);
-            border: 2px solid #fef08a;
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .hamen-btn-active:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+        .input-label {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 600;
         }
 
-        .hamen-btn-active:active {
-            transform: translateY(1px) scale(0.98);
+        .input-row {
+            display: flex;
+            gap: 8px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        input[type="text"] {
+            width: 100%;
+            background: rgba(11, 15, 25, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
         }
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 10, 25, 0.6);
+
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
+        }
+
+        .save-btn {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .save-btn:hover {
+            background: rgba(168, 85, 247, 0.3);
+        }
+
+        .counter-section {
+            text-align: center;
+            padding: 12px 0;
+        }
+
+        .counter-title {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .counter-value {
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+            line-height: 1.1;
+        }
+
+        .hamen-btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hamen-btn {
+            width: 100%;
+            height: 64px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.45);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hamen-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .hamen-btn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .hamen-btn:disabled {
+            background: #334155;
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .cooldown-text {
+            font-size: 0.85rem;
+            color: #f43f5e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .history-title {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .view-toggle-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-sub);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-toggle-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--text-main);
+        }
+
+        .history-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 450px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.3);
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(217, 119, 6, 0.5);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(234, 179, 8, 0.8);
+
+        .history-item {
+            background: rgba(11, 15, 25, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 14px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            animation: fadeIn 0.3s ease-out;
         }
 
-        /* Entry Animation for Feed Items */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .feed-item-new {
-            animation: slideIn 0.4s ease-out forwards;
+        .item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Toast notification */
-        #toast {
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        .user-nickname {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        .timestamp {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        .prayer-text {
+            font-size: 0.88rem;
+            color: var(--accent-gold);
+            line-height: 1.35;
+            word-break: break-all;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            padding-top: 20px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e1b4b;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center p-4 sm:p-6 md:p-8 selection:bg-amber-500 selection:text-black">
+<body>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed top-5 z-50 transform -translate-y-20 opacity-0 pointer-events-none bg-amber-500 text-slate-950 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center space-x-2 border border-amber-300">
-        <i id="toast-icon" class="fas fa-info-circle text-lg"></i>
-        <span id="toast-message">알림 메시지</span>
-    </div>
-
-    <!-- Main Container -->
-    <main class="w-full max-w-2xl mx-auto flex-1 flex flex-col items-center justify-start space-y-6">
-        
-        <!-- Header Section -->
-        <header class="text-center space-y-3 pt-4 w-full">
-            <div class="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-purple-900/50 border border-purple-500/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wider">
-                <i class="fas text-amber-400 fa-radio animate-pulse"></i>
-                <span>SPOON RADIO DJ 하늘 공식 하늘교</span>
-            </div>
-            
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight font-serif-kr bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 drop-shadow-md">
-                하늘교 '하멘' 성전
-            </h1>
-            
-            <p class="text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-                매일 매시간 DJ 하늘님을 향해 올리는 거룩한 한마디,<br>
-                <span class="text-amber-400 font-bold">"하멘"</span> 버튼을 눌러 당신의 마음을 남겨주세요.
-            </p>
-
-            <!-- Dynamic Day Counter Badge -->
-            <div class="pt-1">
-                <span class="inline-block px-4 py-1 bg-amber-500/10 border border-amber-500/40 rounded-full text-amber-300 text-xs sm:text-sm font-bold shadow-inner">
-                    ✨ <span id="days-counter" class="text-amber-200 font-black">0</span>일째 되는 하늘교
-                </span>
+    <div class="container">
+        <header>
+            <h1 class="church-title">✨ 하늘교 성전 ✨</h1>
+            <p class="sub-title">DJ 하늘을 향한 마음을 모아 기도합시다</p>
+            <div class="day-counter-badge">
+                <span>🙏</span> <span id="daysCount">0</span>일째 되는 하늘교
             </div>
         </header>
 
-        <!-- User Nickname & Prayer Input Box & Counter Overview -->
-        <section class="w-full glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <!-- Inputs Section -->
-                <div class="w-full md:w-2/3 space-y-3">
-                    <!-- Nickname Input -->
-                    <div class="space-y-1">
-                        <label for="nickname-input" class="text-xs text-amber-300/80 font-semibold flex items-center gap-1.5">
-                            <i class="fas fa-user-circle"></i> 성도 닉네임 설정
-                        </label>
-                        <div class="relative">
-                            <input type="text" id="nickname-input" maxlength="12" placeholder="닉네임을 입력하세요" 
-                                class="w-full bg-slate-900/80 text-amber-100 placeholder-slate-500 text-sm rounded-xl px-4 py-2 border border-purple-500/30 focus:outline-none focus:border-amber-400 transition-all">
-                            <button id="save-nickname-btn" class="absolute right-1.5 top-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs px-2.5 py-1 rounded-lg border border-amber-500/30 transition-all">
-                                저장
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Prayer Message Input -->
-                    <div class="space-y-1">
-                        <label for="prayer-input" class="text-xs text-amber-300/80 font-semibold flex items-center gap-1.5">
-                            <i class="fas fa-comment-dots"></i> 기도 한마디
-                        </label>
-                        <input type="text" id="prayer-input" maxlength="40" placeholder="하늘님께 남길 기도/메시지를 적어주세요" 
-                            class="w-full bg-slate-900/80 text-amber-100 placeholder-slate-500 text-sm rounded-xl px-4 py-2 border border-purple-500/30 focus:outline-none focus:border-amber-400 transition-all">
-                    </div>
-                </div>
-
-                <!-- Total Count Display -->
-                <div class="w-full md:w-1/3 bg-slate-950/60 rounded-xl p-4 border border-amber-500/20 text-center flex flex-col justify-center h-full">
-                    <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold">전체 누적 하멘</span>
-                    <span id="total-count" class="text-3xl font-extrabold font-serif-kr text-amber-400 tracking-wider">0</span>
+        <!-- 프로필 & 기도문 설정 -->
+        <div class="card profile-section">
+            <div class="input-group">
+                <label class="input-label" for="nicknameInput">신도 닉네임</label>
+                <div class="input-row">
+                    <input type="text" id="nicknameInput" placeholder="닉네임을 입력하세요" maxlength="12">
+                    <button class="save-btn" id="saveNicknameBtn">저장</button>
                 </div>
             </div>
-        </section>
 
-        <!-- Main Hamen Button Action Area -->
-        <section class="w-full glass-card rounded-2xl p-6 sm:p-8 text-center flex flex-col items-center justify-center space-y-4 relative overflow-hidden">
-            <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
-            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
+            <div class="input-group">
+                <label class="input-label" for="prayerInput">기도 한마디</label>
+                <input type="text" id="prayerInput" placeholder="하늘님께 전할 기도를 입력하세요 (기본: 하멘!)" maxlength="50">
+            </div>
+        </div>
 
-            <p id="cooldown-status-text" class="text-xs sm:text-sm text-slate-300 font-medium h-5">
-                1시간에 한 번씩 하멘을 외칠 수 있습니다.
-            </p>
+        <!-- 누적 카운터 -->
+        <div class="card counter-section">
+            <div class="counter-title">전체 누적 하멘</div>
+            <div class="counter-value" id="totalCount">0</div>
+        </div>
 
-            <!-- BIG HAMEN BUTTON -->
-            <button id="hamen-btn" class="hamen-btn-active w-48 h-48 sm:w-56 sm:h-56 rounded-full flex flex-col items-center justify-center text-white font-serif-kr shadow-2xl transition-all cursor-pointer group">
-                <i class="fas fa-hands-praying text-3xl sm:text-4xl text-amber-200 mb-2 group-hover:scale-110 transition-transform"></i>
-                <span class="text-3xl sm:text-4xl font-bold tracking-widest text-amber-100">하멘</span>
-                <span id="btn-subtext" class="text-xs text-amber-200/80 mt-1">클릭하여 기도 바치기</span>
+        <!-- 하멘 클릭 버튼 -->
+        <div class="hamen-btn-container">
+            <button class="hamen-btn" id="hamenBtn">
+                <span>🙏</span> 하멘! 누르기
             </button>
-
-            <!-- Cooldown Timer Overlay/Display -->
-            <div id="cooldown-timer-box" class="hidden flex items-center space-x-2 text-amber-400 bg-amber-950/50 px-4 py-2 rounded-full border border-amber-500/30 text-sm font-semibold">
-                <i class="fas fa-clock animate-spin"></i>
-                <span>다음 하멘까지 남은 시간: <span id="timer-text" class="font-mono text-base font-bold text-amber-300">60:00</span></span>
+            <div class="cooldown-text" id="cooldownNotice" style="display: none;">
+                ⏳ 다음 기도까지 남은 시간: <span id="timerText">60:00</span>
             </div>
-        </section>
+        </div>
 
-        <!-- Live Hamen Journal Feed -->
-        <section class="w-full glass-card rounded-2xl p-5 sm:p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-purple-500/20 pb-3">
-                <h2 class="text-lg font-bold font-serif-kr text-amber-300 flex items-center gap-2">
-                    <i class="fas fa-book-bible text-amber-400"></i> 하멘 성전 기록실
-                </h2>
-                <span class="text-xs text-slate-400">실시간 하멘 모음</span>
+        <!-- 실시간 기록실 -->
+        <div class="card">
+            <div class="history-header">
+                <div class="history-title">
+                    <span>📜</span> 실시간 하멘 모음
+                </div>
+                <button class="view-toggle-btn" id="viewToggleBtn">전체보기 (0개)</button>
             </div>
+            <ul class="history-list" id="historyList">
+                <li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>
+            </ul>
+        </div>
 
-            <!-- Scrollable Log Container -->
-            <div id="feed-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-                <!-- Log Items will be inserted here via JS -->
-            </div>
-        </section>
+        <footer>
+            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길!
+        </footer>
+    </div>
 
-    </main>
+    <div class="toast" id="toast">메시지</div>
 
-    <!-- Footer -->
-    <footer class="w-full max-w-2xl mt-8 pt-4 border-t border-purple-900/40 text-center text-xs text-slate-400 py-2">
-        <p>© 2026.09.20 - 하늘을 믿는 자들의 홈페이지</p>
-    </footer>
-
-    <!-- JavaScript Application Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Keys for LocalStorage
-            const STORAGE_KEY_NICKNAME = 'haneul_hamen_nickname';
-            const STORAGE_KEY_LAST_CLICK = 'haneul_hamen_last_click';
-            const STORAGE_KEY_RECORDS = 'haneul_hamen_records_v1';
-            const STORAGE_KEY_TOTAL = 'haneul_hamen_total_count';
+        const nicknameInput = document.getElementById('nicknameInput');
+        const prayerInput = document.getElementById('prayerInput');
+        const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+        const totalCountEl = document.getElementById('totalCount');
+        const hamenBtn = document.getElementById('hamenBtn');
+        const cooldownNotice = document.getElementById('cooldownNotice');
+        const timerText = document.getElementById('timerText');
+        const historyList = document.getElementById('historyList');
+        const toast = document.getElementById('toast');
+        const daysCountEl = document.getElementById('daysCount');
+        const viewToggleBtn = document.getElementById('viewToggleBtn');
 
-            const COOLDOWN_TIME = 60 * 60 * 1000; // 1 hour in milliseconds
+        let currentNickname = localStorage.getItem('sky_nickname') || '';
+        let historyData = JSON.parse(localStorage.getItem('sky_hamen_history')) || [];
+        let lastClickTime = parseInt(localStorage.getItem('sky_last_click_time')) || 0;
+        let isShowAll = false;
+        const COOLDOWN_TIME = 60 * 60 * 1000;
 
-            // DOM Elements
-            const nicknameInput = document.getElementById('nickname-input');
-            const prayerInput = document.getElementById('prayer-input');
-            const saveNicknameBtn = document.getElementById('save-nickname-btn');
-            const totalCountEl = document.getElementById('total-count');
-            const daysCounterEl = document.getElementById('days-counter');
-            const hamenBtn = document.getElementById('hamen-btn');
-            const btnSubtext = document.getElementById('btn-subtext');
-            const cooldownStatusText = document.getElementById('cooldown-status-text');
-            const cooldownTimerBox = document.getElementById('cooldown-timer-box');
-            const timerText = document.getElementById('timer-text');
-            const feedContainer = document.getElementById('feed-container');
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-            const toastIcon = document.getElementById('toast-icon');
+        initPage();
 
-            let timerInterval = null;
-
-            function calculateDaysFromStart() {
-                const startDate = new Date('2023-10-24T00:00:00');
-                const today = new Date();
-                
-                // Zero out time components for clean day calculation
-                const startMidnight = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-                const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-                const diffTime = todayMidnight - startMidnight;
-                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // Inclusive count (Day 1)
-                
-                daysCounterEl.textContent = diffDays > 0 ? diffDays : 1;
+        function initPage() {
+            if (currentNickname) {
+                nicknameInput.value = currentNickname;
+            } else {
+                currentNickname = '무명 신도';
             }
 
-            // Format Date Helper
-            function getFormattedDate(dateObj) {
-                const year = dateObj.getFullYear();
-                const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-                const day = String(dateObj.getDate()).padStart(2, '0');
-                const hours = String(dateObj.getHours()).padStart(2, '0');
-                const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-                const seconds = String(dateObj.getSeconds()).padStart(2, '0');
-                return `${year}년 ${month}월 ${day}일 ${hours}:${minutes}:${seconds}`;
-            }
-
-            // Show Custom Toast Message
-            function showToast(message, isError = false) {
-                toastMessage.textContent = message;
-                if (isError) {
-                    toast.classList.remove('bg-amber-500', 'text-slate-950');
-                    toast.classList.add('bg-rose-600', 'text-white');
-                    toastIcon.className = 'fas fa-exclamation-circle text-lg';
-                } else {
-                    toast.classList.remove('bg-rose-600', 'text-white');
-                    toast.classList.add('bg-amber-500', 'text-slate-950');
-                    toastIcon.className = 'fas fa-check-circle text-lg';
-                }
-
-                toast.classList.remove('-translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.add('translate-y-0', 'opacity-100');
-
-                setTimeout(() => {
-                    toast.classList.remove('translate-y-0', 'opacity-100');
-                    toast.classList.add('-translate-y-20', 'opacity-0', 'pointer-events-none');
-                }, 3000);
-            }
-
-            // Initialize Nickname
-            function initNickname() {
-                const savedNickname = localStorage.getItem(STORAGE_KEY_NICKNAME);
-                if (savedNickname) {
-                    nicknameInput.value = savedNickname;
-                } else {
-                    const randomNum = Math.floor(1000 + Math.random() * 9000);
-                    const defaultNick = `하늘신도_${randomNum}`;
-                    nicknameInput.value = defaultNick;
-                    localStorage.setItem(STORAGE_KEY_NICKNAME, defaultNick);
-                }
-            }
-
-            function executeSystemReset() {
-                localStorage.removeItem(STORAGE_KEY_RECORDS);
-                localStorage.removeItem(STORAGE_KEY_TOTAL);
-                localStorage.removeItem(STORAGE_KEY_LAST_CLICK);
-
-                localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify([]));
-                localStorage.setItem(STORAGE_KEY_TOTAL, '0');
-
-                if (timerInterval) clearInterval(timerInterval);
-
-                const randomNum = Math.floor(1000 + Math.random() * 9000);
-                const newNick = `하늘신도_${randomNum}`;
-                nicknameInput.value = newNick;
-                prayerInput.value = '';
-                localStorage.setItem(STORAGE_KEY_NICKNAME, newNick);
-
-                enableHamenButton();
-                renderFeed();
-                showToast('⚡ 모든 누적 기록 및 쿨타임이 전체 초기화되었습니다!');
-            }
-
-            // Save Nickname Action
-            saveNicknameBtn.addEventListener('click', () => {
-                const newNick = nicknameInput.value.trim();
-                if (!newNick) {
-                    showToast('닉네임을 올바르게 입력해주세요.', true);
-                    return;
-                }
-
-                // Check for secret reset command
-                if (newNick === '스비123') {
-                    executeSystemReset();
-                    return;
-                }
-
-                localStorage.setItem(STORAGE_KEY_NICKNAME, newNick);
-                showToast(`닉네임이 '${newNick}'(으)로 저장되었습니다.`);
-            });
-
-            // Get All Records
-            function getRecords() {
-                const saved = localStorage.getItem(STORAGE_KEY_RECORDS);
-                if (!saved) {
-                    localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify([]));
-                    localStorage.setItem(STORAGE_KEY_TOTAL, '0');
-                    return [];
-                }
-                try {
-                    return JSON.parse(saved);
-                } catch(e) {
-                    return [];
-                }
-            }
-
-            function renderFeed() {
-                const records = getRecords();
-                feedContainer.innerHTML = '';
-
-                if (records.length === 0) {
-                    feedContainer.innerHTML = `
-                        <div class="text-center py-8 text-slate-500 text-sm">
-                            <i class="fas fa-ghost text-2xl mb-2 text-slate-600"></i>
-                            <p>아직 등록된 하멘 기록이 없습니다.<br>첫 번째 하멘과 기도를 남겨주세요!</p>
-                        </div>
-                    `;
-                } else {
-                    records.forEach((rec, idx) => {
-                        const itemEl = document.createElement('div');
-                        itemEl.className = 'bg-slate-900/70 border border-purple-500/20 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 transition-all hover:border-amber-500/40';
-                        if (idx === 0) itemEl.classList.add('feed-item-new');
-
-                        itemEl.innerHTML = `
-                            <div class="flex items-start sm:items-center space-x-2.5">
-                                <span class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-400 font-bold flex items-center justify-center text-xs border border-amber-500/30 shrink-0 mt-0.5 sm:mt-0">
-                                    <i class="fas fa-pray"></i>
-                                </span>
-                                <div class="space-y-0.5">
-                                    <span class="text-xs font-bold text-amber-300">${escapeHtml(rec.nickname)}</span>
-                                    <p class="text-xs text-slate-200">${escapeHtml(rec.text || '하멘!')}</p>
-                                </div>
-                            </div>
-                            <span class="text-[11px] text-slate-400 font-mono self-end sm:self-center shrink-0">${rec.timestamp}</span>
-                        `;
-                        feedContainer.appendChild(itemEl);
-                    });
-                }
-
-                // Update total count
-                const total = localStorage.getItem(STORAGE_KEY_TOTAL) || '0';
-                totalCountEl.textContent = Number(total).toLocaleString();
-            }
-
-            function escapeHtml(text) {
-                return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-            }
-
-            function checkCooldown() {
-                const lastClick = localStorage.getItem(STORAGE_KEY_LAST_CLICK);
-                if (!lastClick) {
-                    enableHamenButton();
-                    return;
-                }
-
-                const elapsed = Date.now() - parseInt(lastClick, 10);
-                if (elapsed >= COOLDOWN_TIME) {
-                    enableHamenButton();
-                } else {
-                    const remainingMs = COOLDOWN_TIME - elapsed;
-                    disableHamenButton(remainingMs);
-                }
-            }
-
-            function enableHamenButton() {
-                if (timerInterval) clearInterval(timerInterval);
-                
-                hamenBtn.disabled = false;
-                hamenBtn.className = 'hamen-btn-active w-48 h-48 sm:w-56 sm:h-56 rounded-full flex flex-col items-center justify-center text-white font-serif-kr shadow-2xl transition-all cursor-pointer group';
-                btnSubtext.textContent = '클릭하여 기도 바치기';
-                cooldownStatusText.textContent = '지금 하멘을 누를 수 있습니다!';
-                cooldownStatusText.className = 'text-xs sm:text-sm text-amber-400 font-medium h-5 animate-bounce';
-                cooldownTimerBox.classList.add('hidden');
-            }
-
-            function disableHamenButton(remainingMs) {
-                hamenBtn.disabled = true;
-                hamenBtn.className = 'w-48 h-48 sm:w-56 sm:h-56 rounded-full flex flex-col items-center justify-center text-slate-400 bg-slate-900/90 border-2 border-slate-700 shadow-inner cursor-not-allowed opacity-80';
-                btnSubtext.textContent = '도배 방지 쿨타임 진행 중';
-                cooldownStatusText.textContent = '도배 방지를 위해 1시간에 한 번만 누를 수 있습니다.';
-                cooldownStatusText.className = 'text-xs sm:text-sm text-slate-400 font-medium h-5';
-                cooldownTimerBox.classList.remove('hidden');
-
-                updateTimerDisplay(remainingMs);
-
-                if (timerInterval) clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    remainingMs -= 1000;
-                    if (remainingMs <= 0) {
-                        clearInterval(timerInterval);
-                        enableHamenButton();
-                        showToast('쿨타임이 끝났습니다! 이제 다시 하멘을 누를 수 있습니다.');
-                    } else {
-                        updateTimerDisplay(remainingMs);
-                    }
-                }, 1000);
-            }
-
-            function updateTimerDisplay(ms) {
-                const totalSec = Math.ceil(ms / 1000);
-                const minutes = Math.floor(totalSec / 60);
-                const seconds = totalSec % 60;
-                timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            }
-
-            hamenBtn.addEventListener('click', () => {
-                const nickname = nicknameInput.value.trim() || '무명 성도';
-                const prayerText = prayerInput.value.trim() || '하멘!';
-                const now = new Date();
-                const timestamp = getFormattedDate(now);
-
-                // Save last click timestamp
-                localStorage.setItem(STORAGE_KEY_LAST_CLICK, Date.now().toString());
-
-                // Save new record
-                const records = getRecords();
-                const newRecord = {
-                    timestamp: timestamp,
-                    nickname: nickname,
-                    text: prayerText
-                };
-                records.unshift(newRecord); // Add to top
-                
-                // Limit stored local records to max 50
-                if (records.length > 50) records.pop();
-                localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(records));
-
-                // Increase total count
-                let total = parseInt(localStorage.getItem(STORAGE_KEY_TOTAL) || '0', 10);
-                total += 1;
-                localStorage.setItem(STORAGE_KEY_TOTAL, total.toString());
-
-                // Clear prayer input after sending
-                prayerInput.value = '';
-
-                // Update UI
-                renderFeed();
-                showToast(`[${timestamp}] ${nickname}님이 하멘을 외쳤습니다!`);
-                checkCooldown();
-            });
-
-            // Initialization
-            initNickname();
-            calculateDaysFromStart();
-            renderFeed();
+            calculateDays();
+            updateHistoryUI();
             checkCooldown();
+
+            setInterval(checkCooldown, 1000);
+        }
+
+        function calculateDays() {
+            const startDate = new Date(2023, 9, 24);
+            const today = new Date();
+            
+            startDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            
+            const diffTime = today - startDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            
+            daysCountEl.textContent = diffDays > 0 ? diffDays : 1;
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        saveNicknameBtn.addEventListener('click', () => {
+            const val = nicknameInput.value.trim();
+
+            if (val === '스비123') {
+                localStorage.removeItem('sky_hamen_history');
+                localStorage.removeItem('sky_last_click_time');
+                historyData = [];
+                lastClickTime = 0;
+                
+                updateHistoryUI();
+                checkCooldown();
+                showToast('🔑 전체 기록 및 쿨타임이 초기화되었습니다.');
+                nicknameInput.value = currentNickname !== '스비123' ? currentNickname : '';
+                return;
+            }
+
+            if (!val) {
+                showToast('닉네임을 입력해주세요!');
+                return;
+            }
+
+            currentNickname = val;
+            localStorage.setItem('sky_nickname', currentNickname);
+            showToast(`닉네임이 '${currentNickname}'(으)로 저장되었습니다.`);
         });
+
+        viewToggleBtn.addEventListener('click', () => {
+            isShowAll = !isShowAll;
+            updateHistoryUI();
+        });
+
+        hamenBtn.addEventListener('click', () => {
+            const now = Date.now();
+            
+            if (now - lastClickTime < COOLDOWN_TIME) {
+                showToast('아직 쿨타임이 지나지 않았습니다!');
+                return;
+            }
+
+            let prayerMsg = prayerInput.value.trim();
+            if (!prayerMsg) {
+                prayerMsg = '하멘!';
+            }
+
+            lastClickTime = now;
+            localStorage.setItem('sky_last_click_time', lastClickTime);
+
+            const newRecord = {
+                nickname: currentNickname || '무명 신도',
+                prayer: prayerMsg,
+                timestamp: formatDate(new Date(now))
+            };
+
+            historyData.unshift(newRecord);
+            localStorage.setItem('sky_hamen_history', JSON.stringify(historyData));
+
+            updateHistoryUI();
+            checkCooldown();
+            showToast('기도가 성공적으로 등록되었습니다. 하멘!');
+            
+            prayerInput.value = '';
+        });
+
+        function updateHistoryUI() {
+            totalCountEl.textContent = historyData.length;
+            viewToggleBtn.textContent = isShowAll ? `접기 (총 ${historyData.length}개)` : `전체보기 (${historyData.length}개)`;
+
+            if (historyData.length === 0) {
+                historyList.innerHTML = '<li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>';
+                return;
+            }
+
+            const displayItems = isShowAll ? historyData : historyData.slice(0, 5);
+
+            historyList.innerHTML = displayItems.map(item => `
+                <li class="history-item">
+                    <div class="item-top">
+                        <span class="user-nickname">${escapeHtml(item.nickname)}</span>
+                        <span class="timestamp">${item.timestamp}</span>
+                    </div>
+                    <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
+                </li>
+            `).join('');
+        }
+
+        function checkCooldown() {
+            const now = Date.now();
+            const elapsed = now - lastClickTime;
+
+            if (elapsed < COOLDOWN_TIME) {
+                hamenBtn.disabled = true;
+                cooldownNotice.style.display = 'flex';
+                
+                const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
+                const minutes = Math.floor(remaining / 60);
+                const seconds = remaining % 60;
+                
+                timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            } else {
+                hamenBtn.disabled = false;
+                cooldownNotice.style.display = 'none';
+            }
+        }
+
+        function formatDate(date) {
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            const hh = String(date.getHours()).padStart(2, '0');
+            const mi = String(date.getMinutes()).padStart(2, '0');
+            const ss = String(date.getSeconds()).padStart(2, '0');
+            return `${yyyy}년 ${mm}월 ${dd}일 ${hh}:${mi}:${ss}`;
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
     </script>
 </body>
 </html>
