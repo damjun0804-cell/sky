@@ -374,6 +374,13 @@
             line-height: 1.5;
         }
 
+        .more-btn {
+            width: 100%;
+            height: 40px;
+            margin-top: 12px;
+            display: none;
+        }
+
         footer {
             margin-top: auto;
             text-align: center;
@@ -477,6 +484,7 @@
             <ul class="history-list" id="historyList">
                 <li class="empty-history">불러오는 중...</li>
             </ul>
+            <button id="moreBtn" class="save-btn more-btn">전체보기</button>
         </div>
 
         <footer>
@@ -486,12 +494,11 @@
 
     <div class="toast" id="toast">메시지</div>
 
-    <!-- Firebase SDK (호환성 버전을 사용하여 HTML 내에서 직접 연동) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <script>
-        // 제출해주신 Firebase 설정값 반영
         const firebaseConfig = {
             apiKey: "AIzaSyBxhY9Eu4UJI6ZUgYLstwwyyvIE8pjX3Lg",
             authDomain: "sky-church-9027c.firebaseapp.com",
@@ -502,7 +509,6 @@
             appId: "1:865755229728:web:241740bcfbdc29e8ddd645"
         };
 
-        // Firebase 초기화
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
@@ -515,12 +521,16 @@
         const cooldownNotice = document.getElementById('cooldownNotice');
         const timerText = document.getElementById('timerText');
         const historyList = document.getElementById('historyList');
+        const moreBtn = document.getElementById('moreBtn');
         const toast = document.getElementById('toast');
         const daysCountEl = document.getElementById('daysCount');
 
         let currentNickname = localStorage.getItem('sky_nickname') || '';
         let lastClickTime = parseInt(localStorage.getItem('sky_last_click_time')) || 0;
         const COOLDOWN_TIME = 60 * 60 * 1000; // 1시간
+
+        let isExpanded = false;
+        let cachedList = [];
 
         initPage();
 
@@ -541,22 +551,43 @@
                 if (!data) {
                     totalCountEl.textContent = '0';
                     historyList.innerHTML = '<li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>';
+                    moreBtn.style.display = 'none';
+                    cachedList = [];
                     return;
                 }
 
-                const list = Object.values(data).reverse();
-                totalCountEl.textContent = list.length;
-
-                historyList.innerHTML = list.slice(0, 50).map(item => `
-                    <li class="history-item">
-                        <div class="item-top">
-                            <span class="user-nickname">${escapeHtml(item.nickname)}</span>
-                            <span class="timestamp">${item.timestamp}</span>
-                        </div>
-                        <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
-                    </li>
-                `).join('');
+                cachedList = Object.values(data).reverse();
+                totalCountEl.textContent = cachedList.length;
+                renderHistoryList();
             });
+        }
+
+        moreBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            renderHistoryList();
+        });
+
+        function renderHistoryList() {
+            if (cachedList.length === 0) return;
+
+            if (cachedList.length > 10) {
+                moreBtn.style.display = 'block';
+                moreBtn.textContent = isExpanded ? '접기' : `전체보기 (${cachedList.length}개)`;
+            } else {
+                moreBtn.style.display = 'none';
+            }
+
+            const displayList = isExpanded ? cachedList.slice(0, 50) : cachedList.slice(0, 10);
+
+            historyList.innerHTML = displayList.map(item => `
+                <li class="history-item">
+                    <div class="item-top">
+                        <span class="user-nickname">${escapeHtml(item.nickname)}</span>
+                        <span class="timestamp">${item.timestamp}</span>
+                    </div>
+                    <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
+                </li>
+            `).join('');
         }
 
         function generateRandomNickname() {
@@ -589,7 +620,6 @@
                 return;
             }
 
-            // '스비123' 입력 시 데이터베이스 및 로컬 기록 초기화
             if (val === '스비123') {
                 if (confirm('모든 성도들의 하멘 데이터베이스 기록과 개인 쿨타임을 전체 초기화하시겠습니까?')) {
                     db.ref('prayers').remove().then(() => {
@@ -622,7 +652,6 @@
             lastClickTime = now;
             localStorage.setItem('sky_last_click_time', lastClickTime);
 
-            // DB에 데이터 저장
             db.ref('prayers').push({
                 nickname: currentNickname || '하늘신도',
                 prayer: prayerMsg,
@@ -658,12 +687,17 @@
         }
 
         function formatDate(date) {
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const dd = String(date.getDate()).padStart(2, '0');
-            const hh = String(date.getHours()).padStart(2, '0');
-            const mi = String(date.getMinutes()).padStart(2, '0');
-            const ss = String(date.getSeconds()).padStart(2, '0');
+            // 한국 시간(KST, UTC+9) 오프셋 계산
+            const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            const kstOffset = 9 * 60 * 60 * 1000;
+            const kstDate = new Date(utc + kstOffset);
+
+            const yyyy = kstDate.getFullYear();
+            const mm = String(kstDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(kstDate.getDate()).padStart(2, '0');
+            const hh = String(kstDate.getHours()).padStart(2, '0');
+            const mi = String(kstDate.getMinutes()).padStart(2, '0');
+            const ss = String(kstDate.getSeconds()).padStart(2, '0');
             return `${yyyy}년 ${mm}월 ${dd}일 ${hh}:${mi}:${ss}`;
         }
 
