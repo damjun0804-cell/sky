@@ -89,11 +89,6 @@
             max-width: 480px;
         }
 
-        .sub-title highlight {
-            color: var(--accent-gold);
-            font-weight: 700;
-        }
-
         .day-counter-badge {
             display: inline-flex;
             align-items: center;
@@ -304,7 +299,7 @@
             font-weight: 700;
         }
 
-        /* 실시간 기록실 */
+        /* 실시간 모음 */
         .history-header {
             display: flex;
             justify-content: space-between;
@@ -318,23 +313,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .view-toggle-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-sub);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .view-toggle-btn:hover {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fff;
         }
 
         .history-list {
@@ -495,10 +473,9 @@
                 <div class="history-title">
                     <span>📜</span> 실시간 하멘 모음
                 </div>
-                <button class="view-toggle-btn" id="viewToggleBtn">전체보기 (0개)</button>
             </div>
             <ul class="history-list" id="historyList">
-                <li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>
+                <li class="empty-history">불러오는 중...</li>
             </ul>
         </div>
 
@@ -509,7 +486,26 @@
 
     <div class="toast" id="toast">메시지</div>
 
+    <!-- Firebase SDK (호환성 버전을 사용하여 HTML 내에서 직접 연동) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <script>
+        // 제출해주신 Firebase 설정값 반영
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxhY9Eu4UJI6ZUgYLstwwyyvIE8pjX3Lg",
+            authDomain: "sky-church-9027c.firebaseapp.com",
+            databaseURL: "https://sky-church-9027c-default-rtdb.firebaseio.com",
+            projectId: "sky-church-9027c",
+            storageBucket: "sky-church-9027c.firebasestorage.app",
+            messagingSenderId: "865755229728",
+            appId: "1:865755229728:web:241740bcfbdc29e8ddd645"
+        };
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         const nicknameInput = document.getElementById('nicknameInput');
         const prayerInput = document.getElementById('prayerInput');
         const saveNicknameBtn = document.getElementById('saveNicknameBtn');
@@ -521,13 +517,10 @@
         const historyList = document.getElementById('historyList');
         const toast = document.getElementById('toast');
         const daysCountEl = document.getElementById('daysCount');
-        const viewToggleBtn = document.getElementById('viewToggleBtn');
 
         let currentNickname = localStorage.getItem('sky_nickname') || '';
-        let historyData = JSON.parse(localStorage.getItem('sky_hamen_history')) || [];
         let lastClickTime = parseInt(localStorage.getItem('sky_last_click_time')) || 0;
-        let isShowAll = false;
-        const COOLDOWN_TIME = 60 * 60 * 1000;
+        const COOLDOWN_TIME = 60 * 60 * 1000; // 1시간
 
         initPage();
 
@@ -535,29 +528,49 @@
             if (currentNickname) {
                 nicknameInput.value = currentNickname;
             } else {
-                // 무작위 기본 닉네임 생성 (예: 하늘신도_5863)
-                const randNum = Math.floor(1000 + Math.random() * 9000);
-                currentNickname = `하늘신도_${randNum}`;
-                nicknameInput.value = currentNickname;
+                generateRandomNickname();
             }
 
             calculateDays();
-            updateHistoryUI();
             checkCooldown();
-
             setInterval(checkCooldown, 1000);
+
+            // 실시간 데이터베이스 수신 listener
+            db.ref('prayers').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (!data) {
+                    totalCountEl.textContent = '0';
+                    historyList.innerHTML = '<li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>';
+                    return;
+                }
+
+                const list = Object.values(data).reverse();
+                totalCountEl.textContent = list.length;
+
+                historyList.innerHTML = list.slice(0, 50).map(item => `
+                    <li class="history-item">
+                        <div class="item-top">
+                            <span class="user-nickname">${escapeHtml(item.nickname)}</span>
+                            <span class="timestamp">${item.timestamp}</span>
+                        </div>
+                        <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
+                    </li>
+                `).join('');
+            });
+        }
+
+        function generateRandomNickname() {
+            const randNum = Math.floor(1000 + Math.random() * 9000);
+            currentNickname = `하늘신도_${randNum}`;
+            nicknameInput.value = currentNickname;
         }
 
         function calculateDays() {
             const startDate = new Date(2023, 9, 24);
             const today = new Date();
-            
             startDate.setHours(0, 0, 0, 0);
             today.setHours(0, 0, 0, 0);
-            
-            const diffTime = today - startDate;
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-            
+            const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
             daysCountEl.textContent = diffDays > 0 ? diffDays : 1;
         }
 
@@ -571,22 +584,25 @@
 
         saveNicknameBtn.addEventListener('click', () => {
             const val = nicknameInput.value.trim();
-
-            if (val === '스비123') {
-                localStorage.removeItem('sky_hamen_history');
-                localStorage.removeItem('sky_last_click_time');
-                historyData = [];
-                lastClickTime = 0;
-                
-                updateHistoryUI();
-                checkCooldown();
-                showToast('🔑 전체 기록 및 쿨타임이 초기화되었습니다.');
-                nicknameInput.value = currentNickname !== '스비123' ? currentNickname : '';
+            if (!val) {
+                showToast('닉네임을 입력해주세요!');
                 return;
             }
 
-            if (!val) {
-                showToast('닉네임을 입력해주세요!');
+            // '스비123' 입력 시 데이터베이스 및 로컬 기록 초기화
+            if (val === '스비123') {
+                if (confirm('모든 성도들의 하멘 데이터베이스 기록과 개인 쿨타임을 전체 초기화하시겠습니까?')) {
+                    db.ref('prayers').remove().then(() => {
+                        localStorage.removeItem('sky_nickname');
+                        localStorage.removeItem('sky_last_click_time');
+                        lastClickTime = 0;
+                        generateRandomNickname();
+                        checkCooldown();
+                        showToast('데이터베이스 및 개인 기록이 완전히 초기화되었습니다.');
+                    }).catch((error) => {
+                        showToast('초기화 실패: ' + error.message);
+                    });
+                }
                 return;
             }
 
@@ -595,64 +611,29 @@
             showToast(`닉네임이 '${currentNickname}'(으)로 저장되었습니다.`);
         });
 
-        viewToggleBtn.addEventListener('click', () => {
-            isShowAll = !isShowAll;
-            updateHistoryUI();
-        });
-
         hamenBtn.addEventListener('click', () => {
             const now = Date.now();
-            
             if (now - lastClickTime < COOLDOWN_TIME) {
                 showToast('아직 쿨타임이 지나지 않았습니다!');
                 return;
             }
 
-            let prayerMsg = prayerInput.value.trim();
-            if (!prayerMsg) {
-                prayerMsg = '하멘!';
-            }
-
+            let prayerMsg = prayerInput.value.trim() || '하멘!';
             lastClickTime = now;
             localStorage.setItem('sky_last_click_time', lastClickTime);
 
-            const newRecord = {
+            // DB에 데이터 저장
+            db.ref('prayers').push({
                 nickname: currentNickname || '하늘신도',
                 prayer: prayerMsg,
-                timestamp: formatDate(new Date(now))
-            };
+                timestamp: formatDate(new Date(now)),
+                createdAt: now
+            });
 
-            historyData.unshift(newRecord);
-            localStorage.setItem('sky_hamen_history', JSON.stringify(historyData));
-
-            updateHistoryUI();
             checkCooldown();
             showToast('기도가 성공적으로 바쳐졌습니다. 하멘!');
-            
             prayerInput.value = '';
         });
-
-        function updateHistoryUI() {
-            totalCountEl.textContent = historyData.length;
-            viewToggleBtn.textContent = isShowAll ? `접기 (총 ${historyData.length}개)` : `전체보기 (${historyData.length}개)`;
-
-            if (historyData.length === 0) {
-                historyList.innerHTML = '<li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>';
-                return;
-            }
-
-            const displayItems = isShowAll ? historyData : historyData.slice(0, 5);
-
-            historyList.innerHTML = displayItems.map(item => `
-                <li class="history-item">
-                    <div class="item-top">
-                        <span class="user-nickname">${escapeHtml(item.nickname)}</span>
-                        <span class="timestamp">${item.timestamp}</span>
-                    </div>
-                    <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
-                </li>
-            `).join('');
-        }
 
         function checkCooldown() {
             const now = Date.now();
@@ -667,7 +648,6 @@
                 const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
                 const minutes = Math.floor(remaining / 60);
                 const seconds = remaining % 60;
-                
                 timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             } else {
                 hamenBtn.disabled = false;
