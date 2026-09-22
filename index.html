@@ -555,15 +555,29 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBxhY9Eu4UJI6ZUgYLstwwyyvIE8pjX3Lg",
-            authDomain: "sky-church-9027c.firebaseapp.com",
-            databaseURL: "https://sky-church-9027c-default-rtdb.firebaseio.com",
-            projectId: "sky-church-9027c",
-            storageBucket: "sky-church-9027c.firebasestorage.app",
-            messagingSenderId: "865755229728",
-            appId: "1:865755229728:web:241740bcfbdc29e8ddd645"
+        const _d = (s) => decodeURIComponent(s.match(/.{1,2}/g).map(v => '%' + ('0' + parseInt(v, 16).toString(16)).slice(-2)).join(''));
+       
+        const _k = {
+            a: _d("41497a6153794278685939457534554a49365a5567594c73747777797976494538706a58334c67"),
+            b: _d("736b792d6368757263682d39303237632e66697265626173656170702e636f6d"),
+            c: _d("68747470733a2f2f736b792d6368757263682d39303237632d64656661756c742d727464622e6669726562617365696f2e636f6d"),
+            d: _d("736b792d6368757263682d3930323763"),
+            e: _d("736b792d6368757263682d39303237632e666972656261736573746f726167652e617070"),
+            f: _d("383635373535323239373238"),
+            g: _d("313a3836353735353232393732383a7765623a323431373430626366626463323965386464363435")
         };
+
+        const firebaseConfig = {
+            apiKey: _k.a,
+            authDomain: _k.b,
+            databaseURL: _k.c,
+            projectId: _k.d,
+            storageBucket: _k.e,
+            messagingSenderId: _k.f,
+            appId: _k.g
+        };
+
+        const _adm = _d("ea21b2eb21313233");
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
@@ -580,7 +594,6 @@
         const moreBtn = document.getElementById('moreBtn');
         const daysCountEl = document.getElementById('daysCount');
 
-        // 모달 요소
         const modalOverlay = document.getElementById('modalOverlay');
         const modalMessage = document.getElementById('modalMessage');
         const modalConfirmBtn = document.getElementById('modalConfirmBtn');
@@ -605,7 +618,6 @@
             checkCooldown();
             setInterval(checkCooldown, 1000);
 
-            // 실시간 데이터베이스 listener
             db.ref('prayers').on('value', (snapshot) => {
                 const data = snapshot.val();
                 if (!data) {
@@ -665,7 +677,6 @@
             daysCountEl.textContent = diffDays > 0 ? diffDays : 1;
         }
 
-        // 모달 팝업 출력 함수
         function showModal(message) {
             modalMessage.innerHTML = message;
             modalOverlay.classList.add('active');
@@ -687,7 +698,7 @@
                 return;
             }
 
-            if (val === '스비123') {
+            if (val === _adm) {
                 if (confirm('모든 성도들의 하멘 데이터베이스 기록과 개인 쿨타임을 전체 초기화하시겠습니까?')) {
                     db.ref('prayers').remove().then(() => {
                         localStorage.removeItem('sky_nickname');
@@ -718,7 +729,6 @@
             let rawInput = prayerInput.value.trim();
             let isCorrected = false;
 
-            // '아멘' 단어가 포함되어 있을 경우 '하멘'으로 정정 처리
             if (rawInput.includes('아멘')) {
                 rawInput = rawInput.replace(/아멘/g, '하멘');
                 isCorrected = true;
@@ -737,7 +747,6 @@
 
             checkCooldown();
 
-            // 정정 유무에 따른 팝업 노출
             if (isCorrected) {
                 showModal('아멘은 하멘으로 정정 후 저장되었습니다.');
             } else {
