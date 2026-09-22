@@ -537,7 +537,7 @@
         </div>
 
         <footer>
-            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길!
+            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길 ~
         </footer>
     </div>
 
@@ -555,16 +555,16 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <script>
-        const _d = (s) => decodeURIComponent(s.match(/.{1,2}/g).map(v => '%' + ('0' + parseInt(v, 16).toString(16)).slice(-2)).join(''));
-       
+        const _d = (s) => decodeURIComponent(atob(s).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+
         const _k = {
-            a: _d("41497a6153794278685939457534554a49365a5567594c73747777797976494538706a58334c67"),
-            b: _d("736b792d6368757263682d39303237632e66697265626173656170702e636f6d"),
-            c: _d("68747470733a2f2f736b792d6368757263682d39303237632d64656661756c742d727464622e6669726562617365696f2e636f6d"),
-            d: _d("736b792d6368757263682d3930323763"),
-            e: _d("736b792d6368757263682d39303237632e666972656261736573746f726167652e617070"),
-            f: _d("383635373535323239373238"),
-            g: _d("313a3836353735353232393732383a7765623a323431373430626366626463323965386464363435")
+            a: _d("QUl6YVN5QnhoWTlFdTRVSkk2WlVnWUxzdHd3eXl2SUU4cGpYM0xn"),
+            b: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZWFwcC5jb20="),
+            c: _d("aHR0cHM6Ly9za3ktY2h1cmNoLTkwMjdjLWRlZmF1bHQtcnRkYi5maXJlYmFzZWlvLmNvbQ=="),
+            d: _d("c2t5LWNodXJjaC05MDI3Yw=="),
+            e: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZXN0b3JhZ2UuYXBw"),
+            f: _d("ODY1NzU1MjI5NzI4"),
+            g: _d("MTo4NjU3NTUyMjk3Mjg6d2ViOjI0MTc0MGJjZmJkYzI5ZThkZDY0NDU=")
         };
 
         const firebaseConfig = {
@@ -577,7 +577,7 @@
             appId: _k.g
         };
 
-        const _adm = _d("ea21b2eb21313233");
+        const _adm = _d("7Iqk6LmEMTIz");
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
