@@ -648,7 +648,16 @@
                 return;
             }
 
-            let prayerMsg = prayerInput.value.trim() || '하멘!';
+            let rawInput = prayerInput.value.trim();
+            let isCorrected = false;
+
+            // '아멘' 단어가 포함되어 있을 경우 '하멘'으로 정정 처리
+            if (rawInput.includes('아멘')) {
+                rawInput = rawInput.replace(/아멘/g, '하멘');
+                isCorrected = true;
+            }
+
+            let prayerMsg = rawInput || '하멘!';
             lastClickTime = now;
             localStorage.setItem('sky_last_click_time', lastClickTime);
 
@@ -660,7 +669,13 @@
             });
 
             checkCooldown();
-            showToast('기도가 성공적으로 바쳐졌습니다. 하멘!');
+
+            if (isCorrected) {
+                showToast('아멘은 하멘으로 정정 후 저장되었습니다.');
+            } else {
+                showToast('기도가 성공적으로 바쳐졌습니다. 하멘!');
+            }
+
             prayerInput.value = '';
         });
 
