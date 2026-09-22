@@ -1,10 +1,5 @@
 # 📻 하늘교 '하멘' 성전
 
-<p align="center">
-  <img src="https://img.shields.io/badge/SPOON_RADIO-DJ_하늘-purple?style=for-the-badge" alt="SPOON RADIO DJ 하늘">
-  <img src="https://img.shields.io/badge/Status-Active-gold?style=for-the-badge" alt="Active">
-</p>
-
 > **SPOON RADIO DJ 하늘**님을 향한 팬들의 마음과 기도를 모으는 실시간 참여형 웹 서비스입니다.  
 > 버튼 클릭 한 번으로 소원과 메시지를 남기고 실시간으로 성도들의 기도를 공유할 수 있습니다.
 
