@@ -1,336 +1,812 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>하늘교 '하멘' 성전</title>
-  <style>
-    :root {
-      --primary-color: #8A2BE2;
-      --secondary-color: #4B0082;
-      --background-color: #0d001a;
-      --card-bg: #1a0033;
-      --text-color: #e6ccff;
-      --gold-accent: #ffd700;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하늘교 '하멘' 성전</title>
+    <!-- Pretendard 및 명조 폰트 로드 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0614;
+            --card-bg: rgba(23, 14, 38, 0.85);
+            --border-color: rgba(251, 191, 36, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #a1a1aa;
+            --accent-gold: #fbbf24;
+            --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            --gold-glow: rgba(245, 158, 11, 0.5);
+        }
 
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    .container {
-      max-width: 600px;
-      width: 100%;
-      background-color: var(--card-bg);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
-      border: 1px solid var(--primary-color);
-      box-sizing: border-box;
-    }
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 50% 0%, rgba(112, 26, 117, 0.35) 0px, transparent 60%),
+                radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.12) 0px, transparent 60%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 15px 60px 15px;
+        }
 
-    h1, h2 {
-      text-align: center;
-      color: var(--gold-accent);
-      margin-bottom: 20px;
-    }
+        .container {
+            width: 100%;
+            max-width: 620px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    .counter-box {
-      text-align: center;
-      background: rgba(138, 43, 226, 0.2);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
+        /* 헤더 디자인 */
+        header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .counter {
-      font-size: 2em;
-      font-weight: bold;
-      color: var(--gold-accent);
-    }
+        .top-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(88, 28, 135, 0.5);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #d8b4fe;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
 
-    .form-group {
-      margin-bottom: 15px;
-    }
+        .church-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fef08a;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(250, 204, 21, 0.4), 0 0 10px rgba(245, 158, 11, 0.3);
+            margin: 4px 0;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+        .sub-title {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            max-width: 480px;
+        }
 
-    input[type="text"], textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid var(--primary-color);
-      background-color: #2a0052;
-      color: #fff;
-      box-sizing: border-box;
-      font-family: inherit;
-    }
+        .day-counter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fef08a;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
 
-    textarea {
-      height: 100px;
-      resize: vertical;
-    }
+        /* 카드 공통 */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+        /* 상단 입력 & 카운터 레이아웃 */
+        .top-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 16px;
+        }
 
-    button:hover {
-      background-color: var(--secondary-color);
-    }
+        @media (max-width: 580px) {
+            .top-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-    button:disabled {
-      background-color: #555;
-      cursor: not-allowed;
-    }
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
 
-    .timer {
-      text-align: center;
-      margin-top: 10px;
-      color: #ff9999;
-      font-size: 0.9em;
-    }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
 
-    .prayer-list {
-      margin-top: 30px;
-    }
+        .input-label {
+            font-size: 0.8rem;
+            color: #d4d4d8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    .prayer-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid var(--gold-accent);
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 0 5px 5px 0;
-    }
+        .input-row {
+            display: flex;
+            gap: 8px;
+        }
 
-    .prayer-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85em;
-      color: #aaa;
-      margin-bottom: 8px;
-    }
+        input[type="text"] {
+            width: 100%;
+            background: rgba(10, 6, 18, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+        }
 
-    /* 줄바꿈 및 공백 유지를 위한 스타일 설정 */
-    .prayer-content {
-      white-space: pre-wrap;
-      word-break: break-word;
-      line-height: 1.5;
-    }
-  </style>
-  
-  <!-- Firebase SDK 추가 -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        input[type="text"]:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+        }
+
+        .save-btn {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fef08a;
+            padding: 0 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .save-btn:hover {
+            background: rgba(245, 158, 11, 0.4);
+            color: #fff;
+        }
+
+        /* 누적 카운터 박스 */
+        .counter-box {
+            background: rgba(10, 6, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .counter-title {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .counter-value {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            line-height: 1;
+        }
+
+        /* 하멘 원형 버튼 영역 */
+        .hamen-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: #fef08a;
+            font-weight: 700;
+        }
+
+        .circle-btn-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle-hamen-btn {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            border: 3px solid #fef08a;
+            background: radial-gradient(circle, #f59e0b 0%, #d97706 60%, #78350f 100%);
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            box-shadow: 0 0 40px var(--gold-glow), inset 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .circle-hamen-btn:hover:not(:disabled) {
+            transform: scale(1.04);
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5);
+        }
+
+        .circle-hamen-btn:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .circle-hamen-btn:disabled {
+            background: radial-gradient(circle, #3f3f46 0%, #18181b 100%);
+            border-color: #52525b;
+            color: #71717a;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .hands-icon {
+            font-size: 2.2rem;
+            margin-bottom: -2px;
+        }
+
+        .btn-main-text {
+            font-family: 'Gowun Batang', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .btn-sub-text {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .cooldown-text {
+            font-size: 0.88rem;
+            color: #f43f5e;
+            font-weight: 700;
+        }
+
+        /* 실시간 모음 */
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .history-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .history-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.4);
+            border-radius: 4px;
+        }
+
+        .history-item {
+            background: rgba(10, 6, 18, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 14px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-nickname {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #e4e4e7;
+        }
+
+        .timestamp {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        .prayer-text {
+            font-size: 0.85rem;
+            color: #fef08a;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 24px 0;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .more-btn {
+            width: 100%;
+            height: 40px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            padding-top: 10px;
+        }
+
+        /* 커스텀 팝업 (Modal) 스타일 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: #170e26;
+            border: 1px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 28px 24px 20px 24px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+            transform: scale(0.85);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .modal-body {
+            font-size: 0.98rem;
+            color: #fef08a;
+            font-weight: 600;
+            line-height: 1.6;
+            word-break: keep-all;
+            margin-bottom: 24px;
+        }
+
+        .modal-confirm-btn {
+            width: 100%;
+            height: 44px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+            transition: opacity 0.2s;
+        }
+
+        .modal-confirm-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="하늘교 '하멘' 성전">
+    <meta property="og:description" content="하늘교를 위한 신성한 기도를 남겨주세요.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/damjun0804-cell/sky/main/KakaoTalk_20260927_160638527.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 </head>
 <body>
 
-  <div class="container">
-    <h1>🙏 하늘교 '하멘' 성전 🙏</h1>
-    
-    <div class="counter-box">
-      <div>개교 후 경과일: <span id="daysCount">0</span>일</div>
-      <div>누적 기도 수</div>
-      <div class="counter" id="totalPrayers">0</div>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header>
+            <div class="top-badge">📻 SPOON RADIO DJ 하늘 공식 하늘교</div>
+            <h1 class="church-title">하늘교 '하멘' 성전</h1>
+            <p class="sub-title">
+                매일 매시간 DJ 하늘님을 향해 올리는 거룩한 한마디,<br>
+                <span style="color: var(--accent-gold); font-weight: 700;">"하멘"</span> 버튼을 눌러 당신의 마음을 남겨주세요.
+            </p>
+            <div class="day-counter-badge">
+                <span>✨</span> <span id="daysCount">0</span>일째 되는 하늘교
+            </div>
+        </header>
+
+        <!-- 상단 카드 영역 -->
+        <div class="card top-card-grid">
+            <div class="profile-section">
+                <div class="input-group">
+                    <label class="input-label" for="nicknameInput">
+                        <span>👤</span> 성도 닉네임 설정
+                    </label>
+                    <div class="input-row">
+                        <input type="text" id="nicknameInput" placeholder="닉네임을 입력하세요" maxlength="12">
+                        <button class="save-btn" id="saveNicknameBtn">저장</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" for="prayerInput">
+                        <span>💬</span> 기도 한마디
+                    </label>
+                    <input type="text" id="prayerInput" placeholder="하늘님께 남길 기도/메시지를 적어주세요" maxlength="50">
+                </div>
+            </div>
+
+            <div class="counter-box">
+                <div class="counter-title">전체 누적 하멘</div>
+                <div class="counter-value" id="totalCount">0</div>
+            </div>
+        </div>
+
+        <!-- 하멘 버튼 카운트 영역 -->
+        <div class="card hamen-section">
+            <div class="status-text" id="statusText">지금 하멘을 누를 수 있습니다!</div>
+            
+            <div class="circle-btn-wrapper">
+                <button class="circle-hamen-btn" id="hamenBtn">
+                    <span class="hands-icon">🙏</span>
+                    <span class="btn-main-text">하멘</span>
+                    <span class="btn-sub-text">클릭하여 기도 바치기</span>
+                </button>
+            </div>
+
+            <div class="cooldown-text" id="cooldownNotice" style="display: none;">
+                ⏳ 다음 기도까지 남은 시간: <span id="timerText">60:00</span>
+            </div>
+        </div>
+
+        <!-- 실시간 하멘 모음 -->
+        <div class="card">
+            <div class="history-header">
+                <div class="history-title">
+                    <span>📜</span> 실시간 하멘 모음
+                </div>
+            </div>
+            <ul class="history-list" id="historyList">
+                <li class="empty-history">불러오는 중...</li>
+            </ul>
+            <button id="moreBtn" class="save-btn more-btn">전체보기</button>
+        </div>
+
+        <footer>
+            © 하늘교 성전 - DJ 하늘님의 축복이 가득하길 ~
+        </footer>
     </div>
 
-    <form id="prayerForm">
-      <div class="form-group">
-        <label for="nickname">닉네임</label>
-        <input type="text" id="nickname" required placeholder="닉네임을 입력하세요">
-      </div>
-      <div class="form-group">
-        <label for="prayerMessage">기도 문구</label>
-        <textarea id="prayerMessage" required placeholder="기도 문구를 작성하세요 (엔터로 줄바꿈 가능)"></textarea>
-      </div>
-      <button type="submit" id="submitBtn">하멘 (기도하기)</button>
-      <div class="timer" id="cooldownTimer"></div>
-    </form>
-
-    <div class="prayer-list">
-      <h2>최근 기도 목록</h2>
-      <div id="prayersContainer"></div>
+    <!-- 커스텀 모달 팝업 레이아웃 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <div class="modal-icon">✨</div>
+            <div class="modal-body" id="modalMessage">알림 내용</div>
+            <button class="modal-confirm-btn" id="modalConfirmBtn">확인</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Firebase 설정
-    const firebaseConfig = {
-      // 실제 Firebase 프로젝트 설정 값을 넣어야 합니다.
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-    const prayersRef = database.ref('prayers');
+    <script>
+        const _d = (s) => decodeURIComponent(atob(s).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
 
-    // 개교 경과일 계산 (2023년 10월 24일 기준)
-    const startDate = new Date('2023-10-24');
-    const today = new Date();
-    const diffTime = Math.abs(today - startDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('daysCount').textContent = diffDays;
+        const _k = {
+            a: _d("QUl6YVN5QnhoWTlFdTRVSkk2WlVnWUxzdHd3eXl2SUU4cGpYM0xn"),
+            b: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZWFwcC5jb20="),
+            c: _d("aHR0cHM6Ly9za3ktY2h1cmNoLTkwMjdjLWRlZmF1bHQtcnRkYi5maXJlYmFzZWlvLmNvbQ=="),
+            d: _d("c2t5LWNodXJjaC05MDI3Yw=="),
+            e: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZXN0b3JhZ2UuYXBw"),
+            f: _d("ODY1NzU1MjI5NzI4"),
+            g: _d("MTo4NjU3NTUyMjk3Mjg6d2ViOjI0MTc0MGJjZmJkYzI5ZThkZDY0NDU=")
+        };
 
-    // DOM 요소
-    const prayerForm = document.getElementById('prayerForm');
-    const nicknameInput = document.getElementById('nickname');
-    const prayerMessageInput = document.getElementById('prayerMessage');
-    const submitBtn = document.getElementById('submitBtn');
-    const cooldownTimer = document.getElementById('cooldownTimer');
-    const prayersContainer = document.getElementById('prayersContainer');
-    const totalPrayersElement = document.getElementById('totalPrayers');
+        const firebaseConfig = {
+            apiKey: _k.a,
+            authDomain: _k.b,
+            databaseURL: _k.c,
+            projectId: _k.d,
+            storageBucket: _k.e,
+            messagingSenderId: _k.f,
+            appId: _k.g
+        };
 
-    // 쿨타임 처리 (1시간)
-    const COOLDOWN_TIME = 60 * 60 * 1000;
-    
-    function checkCooldown() {
-      const lastSubmit = localStorage.getItem('lastPrayerTime');
-      if (lastSubmit) {
-        const now = new Date().getTime();
-        const timePassed = now - parseInt(lastSubmit);
-        
-        if (timePassed < COOLDOWN_TIME) {
-          const remainingTime = COOLDOWN_TIME - timePassed;
-          startTimer(remainingTime);
-          return true;
+        const _adm = _d("7Iqk6LmEMTIz");
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        const nicknameInput = document.getElementById('nicknameInput');
+        const prayerInput = document.getElementById('prayerInput');
+        const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+        const totalCountEl = document.getElementById('totalCount');
+        const hamenBtn = document.getElementById('hamenBtn');
+        const statusText = document.getElementById('statusText');
+        const cooldownNotice = document.getElementById('cooldownNotice');
+        const timerText = document.getElementById('timerText');
+        const historyList = document.getElementById('historyList');
+        const moreBtn = document.getElementById('moreBtn');
+        const daysCountEl = document.getElementById('daysCount');
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+        let currentNickname = localStorage.getItem('sky_nickname') || '';
+        let lastClickTime = parseInt(localStorage.getItem('sky_last_click_time')) || 0;
+        const COOLDOWN_TIME = 60 * 60 * 1000; // 1시간
+
+        let isExpanded = false;
+        let cachedList = [];
+
+        initPage();
+
+        function initPage() {
+            if (currentNickname) {
+                nicknameInput.value = currentNickname;
+            } else {
+                generateRandomNickname();
+            }
+
+            calculateDays();
+            checkCooldown();
+            setInterval(checkCooldown, 1000);
+
+            db.ref('prayers').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (!data) {
+                    totalCountEl.textContent = '0';
+                    historyList.innerHTML = '<li class="empty-history">아직 등록된 하멘이 없습니다.<br>첫 번째 기도를 올려보세요!</li>';
+                    moreBtn.style.display = 'none';
+                    cachedList = [];
+                    return;
+                }
+
+                cachedList = Object.values(data).reverse();
+                totalCountEl.textContent = cachedList.length;
+                renderHistoryList();
+            });
         }
-      }
-      return false;
-    }
 
-    function startTimer(duration) {
-      submitBtn.disabled = true;
-      let timer = duration / 1000;
-      
-      const interval = setInterval(() => {
-        const minutes = parseInt(timer / 60, 10);
-        const seconds = parseInt(timer % 60, 10);
-
-        cooldownTimer.textContent = `다음 기도까지 남은 시간: ${minutes}분 ${seconds < 10 ? '0' + seconds : seconds}초`;
-
-        if (--timer < 0) {
-          clearInterval(interval);
-          submitBtn.disabled = false;
-          cooldownTimer.textContent = '';
-          localStorage.removeItem('lastPrayerTime');
-        }
-      }, 1000);
-    }
-
-    checkCooldown();
-
-    // 폼 제출 이벤트
-    prayerForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const nickname = nicknameInput.value.trim();
-      let prayerText = prayerMessageInput.value;
-
-      // 관리자 초기화 키워드 체크 (7Iqk6LmEMTIz 디코딩)
-      if (nickname === atob('N0lxazZMbUVNVEl6')) {
-        if (confirm('전체 데이터베이스 및 개인 기록을 초기화하시겠습니까?')) {
-          prayersRef.remove();
-          localStorage.clear();
-          alert('초기화되었습니다.');
-          location.reload();
-          return;
-        }
-      }
-
-      if (checkCooldown()) {
-        alert('아직 쿨타임이 지나지 않았습니다.');
-        return;
-      }
-
-      // '아멘' -> '하멘' 자동 치환
-      prayerText = prayerText.replace(/아멘/g, '하멘');
-
-      // Firebase 데이터 저장
-      const newPrayerRef = prayersRef.push();
-      newPrayerRef.set({
-        nickname: nickname,
-        prayer: prayerText,
-        timestamp: firebase.database.ServerValue.TIMESTAMP
-      }).then(() => {
-        localStorage.setItem('lastPrayerTime', new Date().getTime().toString());
-        prayerMessageInput.value = '';
-        checkCooldown();
-      }).catch((error) => {
-        console.error("저장 실패:", error);
-      });
-    });
-
-    // 실시간 데이터 수신 및 화면 표시
-    prayersRef.on('value', (snapshot) => {
-      prayersContainer.innerHTML = '';
-      const data = snapshot.val();
-      
-      if (data) {
-        const prayersList = Object.values(data);
-        totalPrayersElement.textContent = prayersList.length;
-
-        // 최신순 정렬 후 표시
-        prayersList.reverse().forEach((prayerData) => {
-          const item = document.createElement('div');
-          item.className = 'prayer-item';
-
-          const header = document.createElement('div');
-          header.className = 'prayer-header';
-          
-          const date = prayerData.timestamp ? new Date(prayerData.timestamp).toLocaleString() : '';
-          header.innerHTML = `<span><b>${escapeHtml(prayerData.nickname)}</b></span><span>${date}</span>`;
-
-          const prayerElement = document.createElement('div');
-          prayerElement.className = 'prayer-content';
-
-          // 요청하신 문자열 변환 적용 부분
-          const rawPrayer = prayerData.prayer || '';
-          prayerElement.textContent = rawPrayer.replace(/\\n/g, '\n');
-
-          item.appendChild(header);
-          item.appendChild(prayerElement);
-          prayersContainer.appendChild(item);
+        moreBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            renderHistoryList();
         });
-      } else {
-        totalPrayersElement.textContent = '0';
-      }
-    });
 
-    // XSS 방지용 이스케이프 함수
-    function escapeHtml(text) {
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-  </script>
+        function renderHistoryList() {
+            if (cachedList.length === 0) return;
+
+            if (cachedList.length > 10) {
+                moreBtn.style.display = 'block';
+                moreBtn.textContent = isExpanded ? '접기' : `전체보기 (${cachedList.length}개)`;
+            } else {
+                moreBtn.style.display = 'none';
+            }
+
+            const displayList = isExpanded ? cachedList.slice(0, 50) : cachedList.slice(0, 10);
+
+            historyList.innerHTML = displayList.map(item => `
+                <li class="history-item">
+                    <div class="item-top">
+                        <span class="user-nickname">${escapeHtml(item.nickname)}</span>
+                        <span class="timestamp">${item.timestamp}</span>
+                    </div>
+                    <div class="prayer-text">" ${escapeHtml(item.prayer)} "</div>
+                </li>
+            `).join('');
+        }
+
+        function generateRandomNickname() {
+            const randNum = Math.floor(1000 + Math.random() * 9000);
+            currentNickname = `하늘신도_${randNum}`;
+            nicknameInput.value = currentNickname;
+        }
+
+        function calculateDays() {
+            const startDate = new Date(2023, 9, 24);
+            const today = new Date();
+            startDate.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+            daysCountEl.textContent = diffDays > 0 ? diffDays : 1;
+        }
+
+        function showModal(message) {
+            modalMessage.innerHTML = message;
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        modalConfirmBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        saveNicknameBtn.addEventListener('click', () => {
+            const val = nicknameInput.value.trim();
+            if (!val) {
+                showModal('닉네임을 입력해주세요!');
+                return;
+            }
+
+            if (val === _adm) {
+                if (confirm('모든 성도들의 하멘 데이터베이스 기록과 개인 쿨타임을 전체 초기화하시겠습니까?')) {
+                    db.ref('prayers').remove().then(() => {
+                        localStorage.removeItem('sky_nickname');
+                        localStorage.removeItem('sky_last_click_time');
+                        lastClickTime = 0;
+                        generateRandomNickname();
+                        checkCooldown();
+                        showModal('데이터베이스 및 개인 기록이 완전히 초기화되었습니다.');
+                    }).catch((error) => {
+                        showModal('초기화 실패: ' + error.message);
+                    });
+                }
+                return;
+            }
+
+            currentNickname = val;
+            localStorage.setItem('sky_nickname', currentNickname);
+            showModal(`닉네임이 '<b>${escapeHtml(currentNickname)}</b>'(으)로 저장되었습니다.`);
+        });
+
+        hamenBtn.addEventListener('click', () => {
+            const now = Date.now();
+            if (now - lastClickTime < COOLDOWN_TIME) {
+                showModal('아직 쿨타임이 지나지 않았습니다!');
+                return;
+            }
+
+            let rawInput = prayerInput.value.trim();
+            let isCorrected = false;
+
+            if (rawInput.includes('아멘')) {
+                rawInput = rawInput.replace(/아멘/g, '하멘');
+                isCorrected = true;
+            }
+
+            let prayerMsg = rawInput || '하멘!';
+            lastClickTime = now;
+            localStorage.setItem('sky_last_click_time', lastClickTime);
+
+            db.ref('prayers').push({
+                nickname: currentNickname || '하늘신도',
+                prayer: prayerMsg,
+                timestamp: formatDate(new Date(now)),
+                createdAt: now
+            });
+
+            checkCooldown();
+
+            if (isCorrected) {
+                showModal('아멘은 하멘으로 정정 후 저장되었습니다.');
+            } else {
+                showModal('기도가 성공적으로 바쳐졌습니다. 하멘!');
+            }
+
+            prayerInput.value = '';
+        });
+
+        function checkCooldown() {
+            const now = Date.now();
+            const elapsed = now - lastClickTime;
+
+            if (elapsed < COOLDOWN_TIME) {
+                hamenBtn.disabled = true;
+                statusText.textContent = '1시간 쿨타임이 진행 중입니다.';
+                statusText.style.color = '#f43f5e';
+                cooldownNotice.style.display = 'block';
+                
+                const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
+                const minutes = Math.floor(remaining / 60);
+                const seconds = remaining % 60;
+                timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            } else {
+                hamenBtn.disabled = false;
+                statusText.textContent = '지금 하멘을 누를 수 있습니다!';
+                statusText.style.color = '#fef08a';
+                cooldownNotice.style.display = 'none';
+            }
+        }
+
+        function formatDate(date) {
+            const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            const kstOffset = 9 * 60 * 60 * 1000;
+            const kstDate = new Date(utc + kstOffset);
+
+            const yyyy = kstDate.getFullYear();
+            const mm = String(kstDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(kstDate.getDate()).padStart(2, '0');
+            const hh = String(kstDate.getHours()).padStart(2, '0');
+            const mi = String(kstDate.getMinutes()).padStart(2, '0');
+            const ss = String(kstDate.getSeconds()).padStart(2, '0');
+            return `${yyyy}년 ${mm}월 ${dd}일 ${hh}:${mi}:${ss}`;
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
 </body>
 </html>
