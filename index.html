@@ -309,6 +309,7 @@
           const prayerElement = document.createElement('div');
           prayerElement.className = 'prayer-content';
 
+          // 요청하신 문자열 변환 적용 부분
           const rawPrayer = prayerData.prayer || '';
           prayerElement.textContent = rawPrayer.replace(/\\n/g, '\n');
 
