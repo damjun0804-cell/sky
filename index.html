@@ -49,8 +49,7 @@ header{text-align:center;display:flex;flex-direction:column;align-items:center;g
   position:relative;background:var(--panel);border:1px solid rgba(232,184,74,.55);border-radius:4px;padding:22px;
   box-shadow:inset 0 0 0 5px var(--void),inset 0 0 0 6px rgba(232,184,74,.28),0 14px 40px rgba(0,0,0,.6);
 }
-.card::before,.card::after{content:"❖";position:absolute;color:var(--gold);font-size:.8rem;background:var(--void);padding:0 4px;line-height:1}
-.card::before{top:-7px;left:14px}.card::after{bottom:-7px;right:14px}
+
 .card h2{font-family:'Nanum Myeongjo',serif;font-size:1.05rem;color:var(--gold);text-align:center;margin-bottom:14px;letter-spacing:.1em}
 
 .top-card-grid{display:grid;grid-template-columns:1fr 170px;gap:18px}
@@ -150,6 +149,36 @@ footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;col
 .tablet li::first-letter{color:var(--gold);font-weight:800}
 .gallery{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px}
 .gallery img{flex:0 0 82%;max-width:440px;scroll-snap-align:center;border:1px solid var(--gold);box-shadow:0 0 0 4px var(--void),0 0 0 5px rgba(232,184,74,.4),0 12px 30px rgba(0,0,0,.6);aspect-ratio:1;object-fit:cover}
+
+/* 추가된 스타일 */
+.word-shrine-layout{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+@media(max-width:580px){
+  .word-shrine-layout{flex-direction: column;}
+}
+.word-tablet {
+  flex: 1;
+}
+.shrine-frame {
+  width: 150px;
+  height: auto;
+  aspect-ratio: image_0.png; /* 이미지 비율 유지 */
+  border: 5px solid var(--gold);
+  border-radius: 4px;
+  background-image: url('image_0.png');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px rgba(232,184,74,.5);
+}
+@media(max-width:580px){
+  .shrine-frame{
+    width: 100%;
+    margin-top: 20px;
+  }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="하늘교 '하멘' 성전">
@@ -175,7 +204,19 @@ footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;col
     </p>
     <div class="day-counter-badge">✨ <span id="daysCount">0</span>일째 되는 하늘교</div>
   </header>
-  <div class="card tablet"><h2>하늘의 말씀</h2><ul><li>1. 인내로 어려움을 극복하며 성장하라.</li><li>2. 사랑과 헌신으로 세상을 아름답게 만들어라.</li><li>3. 하늘의 가르침을 실천하여 더 나은 사람이 되어라.</li><li>4. 이해로 서로를 존중하며 아름다운 세상을 만들어라.</li></ul></div>
+
+  <div class="card word-shrine-layout">
+    <div class="word-tablet tablet">
+      <h2>하늘의 말씀</h2>
+      <ul>
+        <li>1. 인내로 어려움을 극복하며 성장하라.</li>
+        <li>2. 사랑과 헌신으로 세상을 아름답게 만들어라.</li>
+        <li>3. 하늘의 가르침을 실천하여 더 나은 사람이 되어라.</li>
+        <li>4. 이해로 서로를 존중하며 아름다운 세상을 만들어라.</li>
+      </ul>
+    </div>
+    <div class="shrine-frame"></div>
+  </div>
 
 
   <div class="card top-card-grid">
@@ -264,7 +305,7 @@ const _d = (s) => decodeURIComponent(atob(s).split('').map(c => '%' + ('00' + c.
 const _k = {
   a: _d("QUl6YVN5QnhoWTlFdTRVSkk2WlVnWUxzdHd3eXl2SUU4cGpYM0xn"),
   b: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZWFwcC5jb20="),
-  c: _d("aHR0cHM6Ly9za3ktY2h1cmNoLTkwMjdjLWRlZmF1bHQtcnRkYi5maXJlYmFzZWlvLmNvbQ=="),
+  c: _d("aHR0cHM6Ly6za3ktY2h1cmNoLTkwMjdjLWRlZmF1bHQtcnRkYi5maXJlYmFzZWlvLmNvbQ=="),
   d: _d("c2t5LWNodXJjaC05MDI3Yw=="),
   e: _d("c2t5LWNodXJjaC05MDI3Yy5maXJlYmFzZXN0b3JhZ2UuYXBw"),
   f: _d("ODY1NzU1MjI5NzI4"),
