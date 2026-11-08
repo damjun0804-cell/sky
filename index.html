@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>하늘교 '하멘' 성전</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Jua&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
 :root{
   --void:#06030c; --plum:#1b0b33; --blood:#7a1231; --gold:#e8b84a; --gold-hi:#ecd793;
   --ivory:#f3e6c4; --dim:#9d8fb3; --panel:rgba(20,9,38,.88);
+  --ff:'Nanum Myeongjo','Gowun Batang',serif; --ff-title:'Nanum Myeongjo',serif; --fw-title:800;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
 body{
@@ -22,7 +23,7 @@ body{
   background-attachment:fixed;padding:36px 14px 60px;display:flex;justify-content:center;
 }
 .container{width:100%;max-width:620px;display:flex;flex-direction:column;gap:22px}
-.serif{font-family:'Nanum Myeongjo','Gowun Batang',serif}
+.serif{font-family:var(--ff)}
 
 /* 헤더 */
 header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
@@ -32,30 +33,30 @@ header{text-align:center;display:flex;flex-direction:column;align-items:center;g
 @keyframes spin{to{transform:rotate(360deg)}}
 .top-badge{font-size:.78rem;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(232,184,74,.45);padding:5px 16px;border-radius:2px;background:rgba(122,18,49,.35)}
 .church-title{
-  font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:2.7rem;letter-spacing:.06em;
+  font-family:var(--ff-title);font-weight:var(--fw-title);font-size:2.7rem;letter-spacing:.06em;
   background:linear-gradient(180deg,var(--gold-hi) 10%,var(--gold) 55%,#9a6a14 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 0 5px rgba(232,184,74,.2));
 }
-.verse{font-family:'Nanum Myeongjo',serif;color:var(--dim);font-size:.95rem;line-height:1.9;max-width:440px}
+.verse{font-family:var(--ff);color:var(--dim);font-size:.95rem;line-height:1.9;max-width:440px}
 .verse b{color:var(--gold);font-weight:700}
 .divider{display:flex;align-items:center;gap:12px;color:var(--gold);width:100%;max-width:360px;font-size:.9rem}
 .divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 .divider::after{transform:scaleX(-1)}
-.day-counter-badge{font-family:'Nanum Myeongjo',serif;font-weight:700;color:var(--gold-hi);font-size:.95rem}
+.day-counter-badge{font-family:var(--ff);font-weight:700;color:var(--gold-hi);font-size:.95rem}
 
 /* 신전 패널 */
 .card{
   position:relative;background:var(--panel);border:1px solid rgba(232,184,74,.55);border-radius:4px;padding:22px;
   box-shadow:inset 0 0 0 5px var(--void),inset 0 0 0 6px rgba(232,184,74,.28),0 14px 40px rgba(0,0,0,.6);
 }
-.card h2{font-family:'Nanum Myeongjo',serif;font-size:1.05rem;color:var(--gold);text-align:center;margin-bottom:14px;letter-spacing:.1em}
+.card h2{font-family:var(--ff);font-size:1.05rem;color:var(--gold);text-align:center;margin-bottom:14px;letter-spacing:.1em}
 
 .top-card-grid{display:grid;grid-template-columns:1fr 170px;gap:18px}
 @media(max-width:580px){.top-card-grid{grid-template-columns:1fr}}
 .profile-section{display:flex;flex-direction:column;gap:14px}
 .input-group{display:flex;flex-direction:column;gap:6px}
-.input-label{font-family:'Nanum Myeongjo',serif;font-size:.85rem;color:var(--ivory);font-weight:700}
+.input-label{font-family:var(--ff);font-size:.85rem;color:var(--ivory);font-weight:700}
 .input-row{display:flex;gap:8px}
 input[type=text]{
   width:100%;background:rgba(0,0,0,.45);border:1px solid rgba(232,184,74,.3);border-radius:2px;padding:10px 12px;
@@ -65,20 +66,20 @@ input[type=text]::placeholder{color:#6f6286}
 input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,184,74,.2)}
 .save-btn{
   background:rgba(122,18,49,.55);border:1px solid var(--gold);color:var(--gold-hi);padding:0 16px;border-radius:2px;
-  font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:.2s;
+  font-family:var(--ff);font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:.2s;
 }
 .save-btn:hover{background:var(--blood)}
 .counter-box{
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;
   border:1px solid rgba(232,184,74,.25);background:radial-gradient(circle,rgba(122,18,49,.45),rgba(0,0,0,.4));
 }
-.counter-title{font-family:'Nanum Myeongjo',serif;font-size:.8rem;color:var(--dim);margin-bottom:6px}
-.counter-value{font-family:'Nanum Myeongjo',serif;font-size:3rem;font-weight:800;color:var(--gold-hi);text-shadow:0 0 5px rgba(232,184,74,.3);line-height:1}
+.counter-title{font-family:var(--ff);font-size:.8rem;color:var(--dim);margin-bottom:6px}
+.counter-value{font-family:var(--ff);font-size:3rem;font-weight:800;color:var(--gold-hi);text-shadow:0 0 5px rgba(232,184,74,.3);line-height:1}
 .counter-unit{font-size:.75rem;color:var(--gold);margin-top:4px}
 
 /* 제단 */
 .hamen-section{display:flex;flex-direction:column;align-items:center;gap:18px;padding:30px 18px 26px;text-align:center;overflow:hidden}
-.status-text{font-family:'Nanum Myeongjo',serif;font-size:.98rem;color:var(--gold-hi);font-weight:700}
+.status-text{font-family:var(--ff);font-size:.98rem;color:var(--gold-hi);font-weight:700}
 .altar{position:relative;width:290px;height:290px;display:grid;place-items:center}
 .altar svg{position:absolute;inset:0;width:100%;height:100%}
 .altar .rays{opacity:.55;animation:spin 60s linear infinite}
@@ -97,14 +98,14 @@ input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,18
   animation:none;background:radial-gradient(circle,#3a3345,#15101f);border-color:#4a4258;color:#6f6586;box-shadow:none;cursor:not-allowed;
 }
 .hands-icon{font-size:2rem}
-.btn-main-text{font-family:'Nanum Myeongjo',serif;font-size:2.4rem;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.btn-main-text{font-family:var(--ff-title);font-size:2.4rem;font-weight:var(--fw-title);text-shadow:0 1px 3px rgba(0,0,0,.45)}
 .btn-sub-text{font-size:.72rem;opacity:.9}
 .burst{position:absolute;left:50%;top:50%;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;border:2px solid var(--gold);opacity:.4;pointer-events:none;animation:burst 1.2s ease-out forwards}
 @keyframes burst{to{transform:scale(1.8);opacity:0}}
-.cooldown-text{font-family:'Nanum Myeongjo',serif;font-size:.9rem;color:#ff6b8b;font-weight:700}
+.cooldown-text{font-family:var(--ff);font-size:.9rem;color:#e0475b;font-weight:700}
 
 /* 교리 */
-.doctrine{list-style:none;display:flex;flex-direction:column;gap:10px;font-family:'Nanum Myeongjo',serif;font-size:.92rem;line-height:1.7;color:var(--ivory)}
+.doctrine{list-style:none;display:flex;flex-direction:column;gap:10px;font-family:var(--ff);font-size:.92rem;line-height:1.7;color:var(--ivory)}
 .doctrine li{padding-left:22px;position:relative}
 .doctrine li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
 
@@ -114,12 +115,12 @@ input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,18
 .history-list::-webkit-scrollbar-thumb{background:rgba(232,184,74,.7);border-radius:3px}
 .history-item{background:rgba(0,0,0,.35);border-left:3px solid var(--gold);padding:11px 14px;display:flex;flex-direction:column;gap:5px}
 .item-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.user-nickname{font-family:'Nanum Myeongjo',serif;font-weight:700;font-size:.9rem;color:var(--gold-hi)}
+.user-nickname{font-family:var(--ff);font-weight:700;font-size:.9rem;color:var(--gold-hi)}
 .timestamp{font-size:.72rem;color:var(--dim)}
-.prayer-text{font-family:'Nanum Myeongjo',serif;font-size:.92rem;color:var(--ivory);word-break:break-all;white-space:pre-wrap;line-height:1.6}
-.empty-history{text-align:center;padding:22px 0;color:var(--dim);font-family:'Nanum Myeongjo',serif;font-size:.9rem;line-height:1.7}
+.prayer-text{font-family:var(--ff);font-size:.92rem;color:var(--ivory);word-break:break-all;white-space:pre-wrap;line-height:1.6}
+.empty-history{text-align:center;padding:22px 0;color:var(--dim);font-family:var(--ff);font-size:.9rem;line-height:1.7}
 .more-btn{width:100%;height:40px;margin-top:12px;display:none}
-footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;color:var(--dim);line-height:1.8}
+footer{text-align:center;font-family:var(--ff);font-size:.82rem;color:var(--dim);line-height:1.8}
 
 /* 모달: 스테인드글라스 아치 */
 .modal-overlay{position:fixed;inset:0;background:rgba(3,1,8,.82);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.25s;z-index:1000;padding:20px}
@@ -133,26 +134,74 @@ footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;col
 }
 .modal-overlay.active .modal-card{transform:none}
 .modal-icon{font-size:2.4rem;margin-bottom:10px;filter:drop-shadow(0 0 3px rgba(232,184,74,.4))}
-.modal-body{font-family:'Nanum Myeongjo',serif;font-size:1rem;color:var(--gold-hi);font-weight:700;line-height:1.7;word-break:keep-all;margin-bottom:22px}
-.modal-confirm-btn{width:100%;height:42px;background:linear-gradient(180deg,#b3213f,var(--blood));border:1px solid var(--gold);border-radius:2px;color:var(--gold-hi);font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:.98rem;cursor:pointer}
+.modal-body{font-family:var(--ff);font-size:1rem;color:var(--gold-hi);font-weight:700;line-height:1.7;word-break:keep-all;margin-bottom:22px}
+.modal-confirm-btn{width:100%;height:42px;background:linear-gradient(180deg,#b3213f,var(--blood));border:1px solid var(--gold);border-radius:2px;color:var(--gold-hi);font-family:var(--ff);font-weight:800;font-size:.98rem;cursor:pointer}
 .modal-confirm-btn:hover{filter:brightness(1.2)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 
-.shrine{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
-.arch-wrap{position:relative;width:240px;display:grid;place-items:center;padding:26px 0}
-.arch-wrap::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:repeating-conic-gradient(rgba(232,184,74,.5) 0 4deg,transparent 4deg 12deg);-webkit-mask:radial-gradient(circle,transparent 38%,#000 40%,transparent 70%);mask:radial-gradient(circle,transparent 38%,#000 40%,transparent 70%);animation:spin 80s linear infinite}
-.arch{position:relative;width:200px;aspect-ratio:420/836;object-fit:cover;border-radius:100px 100px 10px 10px;border:3px double var(--gold-hi);box-shadow:0 0 0 6px var(--void),0 0 0 7px var(--gold),0 0 50px rgba(232,184,74,.5)}
-.shrine .verse{font-size:1.05rem;color:var(--ivory)}
-.tablet ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-family:'Nanum Myeongjo',serif;font-size:.92rem;line-height:1.6;color:var(--ivory);word-break:keep-all}
+.tablet ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-family:var(--ff);font-size:.92rem;line-height:1.6;color:var(--ivory);word-break:keep-all}
 .tablet li{text-align:left}
 .tablet li::first-letter{color:var(--gold);font-weight:800}
-.gallery{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px}
-.gallery img{flex:0 0 82%;max-width:440px;scroll-snap-align:center;border:1px solid var(--gold);box-shadow:0 0 0 4px var(--void),0 0 0 5px rgba(232,184,74,.4),0 12px 30px rgba(0,0,0,.6);aspect-ratio:1;object-fit:cover}
 .tablet-grid{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
 .tablet-text h2{text-align:left;margin-bottom:12px}
 .photo-frame{aspect-ratio:1;padding:6px;background:var(--void);border:1px solid var(--gold);box-shadow:0 0 0 4px var(--void),0 0 0 5px rgba(232,184,74,.45),0 0 26px rgba(232,184,74,.3);position:relative}
 .photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:480px){.tablet-grid{grid-template-columns:96px 1fr;gap:14px}.tablet ul{font-size:.82rem}}
+
+/* ===== 모드 선택 ===== */
+.theme-switch{display:flex;justify-content:center;gap:6px}
+.theme-switch button{font:inherit;font-size:.8rem;font-weight:700;padding:6px 16px;border-radius:999px;border:1px solid var(--gold);background:transparent;color:var(--ivory);cursor:pointer;transition:.2s}
+.theme-switch button[aria-pressed="true"]{background:var(--gold);color:var(--void)}
+
+/* ===== A: 갈색 포스터 ===== */
+body[data-theme="A"]{--void:#331f19;--gold:#d19a49;--gold-hi:#f3dca8;--ivory:#fff;--dim:#cdb8a9;--blood:#6b3a22;--panel:#3f2921;
+  --ff:"Pretendard Variable",Pretendard,-apple-system,sans-serif;--ff-title:'Jua',sans-serif;--fw-title:400;background:#331f19}
+body[data-theme="A"] .halo,body[data-theme="A"] .altar svg{display:none}
+body[data-theme="A"] .church-title{background:none;color:var(--gold);-webkit-text-stroke:7px #fff;paint-order:stroke fill;filter:none;letter-spacing:0;font-size:clamp(2.1rem,8.5vw,3rem)}
+body[data-theme="A"] .top-badge{background:none;border-radius:999px;border-color:rgba(209,154,73,.45);letter-spacing:0}
+body[data-theme="A"] .card{border-radius:10px;border:1px solid rgba(209,154,73,.45);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+body[data-theme="A"] .card h2{letter-spacing:0;font-size:1.3rem;color:#fff}
+body[data-theme="A"] input[type=text]{background:rgba(0,0,0,.3);border-color:rgba(209,154,73,.4);border-radius:8px}
+body[data-theme="A"] .save-btn{background:var(--gold);color:#331f19;border:0;border-radius:8px}
+body[data-theme="A"] .counter-box{background:rgba(0,0,0,.25);border-color:rgba(209,154,73,.35);border-radius:12px}
+body[data-theme="A"] .altar{width:auto;height:auto}
+body[data-theme="A"] .circle-hamen-btn{background:radial-gradient(circle at 50% 35%,#e9b866,#d19a49 55%,#8a5a22);border:3px solid #fff;color:#331f19;box-shadow:0 0 0 6px rgba(209,154,73,.25),0 10px 24px rgba(0,0,0,.45)}
+body[data-theme="A"] .circle-hamen-btn:disabled{background:#5a4a43;border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.55);box-shadow:none}
+body[data-theme="A"] .btn-main-text{text-shadow:none}
+body[data-theme="A"] .history-item{background:rgba(0,0,0,.25)}
+body[data-theme="A"] .modal-card{background:#3f2921;border-radius:20px;box-shadow:none}
+body[data-theme="A"] .modal-confirm-btn{background:var(--gold);color:#331f19;border:0;border-radius:10px}
+body[data-theme="A"] .modal-body{color:#fff}
+body[data-theme="A"] .photo-frame{box-shadow:0 0 0 3px #331f19,0 0 0 4px var(--gold)}
+
+/* ===== B: 푸른 하늘 ===== */
+body[data-theme="B"]{--void:#fff;--gold:#4f6f8b;--gold-hi:#2f78bd;--ivory:#243445;--dim:#5d6f80;--blood:#4f6f8b;--panel:rgba(255,255,255,.82);
+  --ff:"Pretendard Variable",Pretendard,-apple-system,sans-serif;--ff-title:'Black Han Sans',sans-serif;--fw-title:400;
+  background:radial-gradient(ellipse 55% 14% at 8% 58%,#fff,transparent 72%),radial-gradient(ellipse 45% 12% at 95% 78%,rgba(255,255,255,.95),transparent 72%),radial-gradient(ellipse 80% 9% at 50% 100%,#3c8d3a,transparent 80%),linear-gradient(180deg,#2e7fcf 0%,#8fcdf3 42%,#e3f3fc 100%);background-attachment:fixed}
+body[data-theme="B"] .halo,body[data-theme="B"] .altar svg{display:none}
+body[data-theme="B"] header{background:rgba(255,255,255,.72);border:3px dotted #b9c3cd;padding:28px 18px 24px;outline:8px solid rgba(255,255,255,.35)}
+body[data-theme="B"] .church-title{background:none;color:#5a3608;-webkit-text-stroke:9px #fff;paint-order:stroke fill;filter:none;letter-spacing:0;font-size:clamp(2.1rem,9vw,3rem)}
+body[data-theme="B"] .top-badge{background:#4f6f8b;color:#fff;border:0;border-radius:999px;letter-spacing:0}
+body[data-theme="B"] .verse b,body[data-theme="B"] .day-counter-badge{color:#5a3608}
+body[data-theme="B"] .card{border-radius:18px;border:1px solid #c4cfda;box-shadow:0 8px 24px rgba(30,90,150,.15)}
+body[data-theme="B"] .card h2{letter-spacing:0;font-size:1.2rem;color:#243445}
+body[data-theme="B"] input[type=text]{background:#fff;border-color:#c4cfda;border-radius:8px}
+body[data-theme="B"] input[type=text]::placeholder{color:#94a3b2}
+body[data-theme="B"] .save-btn{background:#4f6f8b;color:#fff;border:0;border-radius:8px}
+body[data-theme="B"] .save-btn:hover{background:#3f5c76}
+body[data-theme="B"] .counter-box{background:#fff;border-color:#c4cfda;border-radius:12px}
+body[data-theme="B"] .counter-value{text-shadow:none}
+body[data-theme="B"] .altar{width:auto;height:auto}
+body[data-theme="B"] .circle-hamen-btn{background:radial-gradient(circle at 50% 30%,#a8defa,#4f9fe0 60%,#2c6aa8);border:3px solid #fff;color:#fff;box-shadow:0 0 0 8px rgba(255,255,255,.55),0 10px 24px rgba(30,90,150,.35)}
+body[data-theme="B"] .circle-hamen-btn:disabled{background:#9aa9b8;border-color:#fff;color:#e8eef4;box-shadow:none}
+body[data-theme="B"] .btn-main-text{text-shadow:none}
+body[data-theme="B"] .history-item{background:rgba(255,255,255,.75)}
+body[data-theme="B"] .modal-overlay{background:rgba(20,50,90,.55)}
+body[data-theme="B"] .modal-card{background:#fff;border-color:#4f9fe0;border-radius:20px;box-shadow:none}
+body[data-theme="B"] .modal-confirm-btn{background:#3b82c6;color:#fff;border:0;border-radius:10px}
+body[data-theme="B"] footer{color:#36506a}
+body[data-theme="B"] .photo-frame{background:#fff;border:1px solid #c4cfda;border-radius:10px;box-shadow:0 6px 16px rgba(30,90,150,.2)}
+body[data-theme="B"] .photo-frame img{border-radius:6px}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:title" content="하늘교 '하멘' 성전">
@@ -161,8 +210,15 @@ footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;col
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 </head>
-<body>
+<body data-theme="C">
+<script>try{var _t=localStorage.getItem('sky_theme');if(_t==='A'||_t==='B'||_t==='C')document.body.dataset.theme=_t}catch(e){}</script>
 <div class="container">
+
+  <div class="theme-switch" role="group" aria-label="모드 선택">
+    <button type="button" data-theme-btn="A" aria-pressed="false">갈색</button>
+    <button type="button" data-theme-btn="B" aria-pressed="false">하늘</button>
+    <button type="button" data-theme-btn="C" aria-pressed="true">신전</button>
+  </div>
 
   <header>
     <div class="halo">
@@ -248,6 +304,19 @@ footer{text-align:center;font-family:'Nanum Myeongjo',serif;font-size:.82rem;col
   </div>
 </div>
 
+<script>
+/* 모드 선택 (기본: C) */
+(function(){
+  const btns=document.querySelectorAll('[data-theme-btn]');
+  function setTheme(t){
+    document.body.dataset.theme=t;
+    btns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeBtn===t)));
+    try{localStorage.setItem('sky_theme',t)}catch(e){}
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.themeBtn)));
+  setTheme(document.body.dataset.theme||'C');
+})();
+</script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <script>
@@ -437,7 +506,7 @@ function checkCooldown(){
   if(elapsed<COOLDOWN_TIME){
     hamenBtn.disabled=true;
     statusText.textContent='1시간 쿨타임이 진행 중입니다.';
-    statusText.style.color='#ff6b8b';
+    statusText.style.color='#e0475b';
     cooldownNotice.style.display='block';
     const remaining=Math.ceil((COOLDOWN_TIME-elapsed)/1000);
     const minutes=Math.floor(remaining/60);
