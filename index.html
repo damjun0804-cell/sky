@@ -27,7 +27,7 @@ body{
 /* 헤더 */
 header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .halo{position:relative;width:150px;height:150px;display:grid;place-items:center}
-.halo svg{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.halo svg{position:absolute;inset:0;width:100%;height:100%;opacity:.7;animation:spin 90s linear infinite}
 .halo .eye{position:relative;font-size:2.6rem;filter:drop-shadow(0 0 3px rgba(232,184,74,.5))}
 @keyframes spin{to{transform:rotate(360deg)}}
 .top-badge{font-size:.78rem;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(232,184,74,.45);padding:5px 16px;border-radius:2px;background:rgba(122,18,49,.35)}
@@ -81,8 +81,8 @@ input[type=text]:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,18
 .status-text{font-family:'Nanum Myeongjo',serif;font-size:.98rem;color:var(--gold-hi);font-weight:700}
 .altar{position:relative;width:290px;height:290px;display:grid;place-items:center}
 .altar svg{position:absolute;inset:0;width:100%;height:100%}
-.altar .rays{opacity:.55}
-.altar .ring{opacity:.7}
+.altar .rays{opacity:.55;animation:spin 60s linear infinite}
+.altar .ring{opacity:.7;animation:spin 120s linear infinite reverse}
 .circle-hamen-btn{
   position:relative;width:180px;height:180px;border-radius:50%;cursor:pointer;color:#fff;
   border:3px double var(--gold-hi);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
